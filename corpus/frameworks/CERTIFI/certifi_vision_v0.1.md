@@ -1,7 +1,7 @@
 # CertiFi — Spécification de Vision v0.1
 
-**Statut** : Document normatif — remplace toutes les formulations antérieures  
-**Date** : Avril 2026  
+**Statut** : Document normatif — remplace toutes les formulations antérieures
+**Date** : Avril 2026
 **Précondition** : Ce document a été soumis à une analyse critique adversariale avant publication
 
 ---
@@ -71,23 +71,23 @@ Question 1 — Les données sont-elles physiquement valides ?
     Composant : DQF
     Sortie : données certifiées avec provenance (PROD envelope)
     Périmètre : propriétés physiques observables uniquement
-    
+
         ↓ (précondition satisfaite)
-    
+
 Question 2 — Cette métrique élémentaire mesure-t-elle ce qu'elle prétend mesurer ?
     Composant : MIF
     Sortie : métrique certifiée avec rapport de phases
     Périmètre : une fonction Python, ses propriétés statistiques, son comportement sur données synthétiques et réelles
-    
+
         ↓ (précondition satisfaite)
-    
+
 Question 3 — L'environnement d'application est-il adapté à cette classe de méthodes ?
     Composant : PAF
     Sortie : verdict de qualification + source minimale de performance identifiée
     Périmètre : une paire d'actifs, une classe de signaux, un régime historique
-    
+
         ↓ (précondition satisfaite)
-    
+
 Question 4 — La stratégie est-elle robuste hors-échantillon ?
     Composant : MÉTIS
     Sortie : verdict de robustesse (CERTIFIÉ / SUSPECT / ARCHIVÉ)
@@ -153,19 +153,19 @@ Les conflits entre deux agents (humain ou IA) sur la même session sont résolus
 
 Ces recommandations sont issues de l'analyse critique et constituent des axes de travail, pas des engagements.
 
-**R1 — Définir un "Score de Maturité CertiFi"**  
+**R1 — Définir un "Score de Maturité CertiFi"**
 Un composant certifié DQF n'a pas le même niveau de confiance qu'un composant qui a traversé la chaîne complète DQF → MIF → PAF → MÉTIS. Un score composite (0 à 4, une unité par couche validée) rendrait visible le niveau de certification d'un composant dans la KB.
 
-**R2 — Créer un protocole de "re-certification partielle"**  
+**R2 — Créer un protocole de "re-certification partielle"**
 Si seul le paquet MÉTIS change de version majeure, il doit être possible de recertifier uniquement la couche MÉTIS d'une stratégie sans refaire DQF, MIF, et PAF. Ce protocole doit être spécifié et testé.
 
-**R3 — Documenter les conditions de transposabilité hors finance**  
+**R3 — Documenter les conditions de transposabilité hors finance**
 Avant d'affirmer que CertiFi s'applique à d'autres domaines, définir les conditions minimales qu'un domaine doit satisfaire pour que la chaîne soit applicable : existence d'un équivalent "données OHLCV", d'un équivalent "benchmark passif", d'une notion de "régime". Si ces conditions ne sont pas satisfaites, le domaine nécessite une adaptation explicite de la chaîne, pas une simple analogie.
 
-**R4 — Spécifier le protocole de revue humaine des sorties LLM**  
+**R4 — Spécifier le protocole de revue humaine des sorties LLM**
 Si des agents IA participent à la production de spécifications, de code, ou de rapports dans l'écosystème CertiFi, définir un protocole de revue adversariale humaine : qui revoit quoi, selon quel critère, avec quel délai. Ce protocole est lui-même un composant de l'écosystème et doit être documenté dans la KB.
 
-**R5 — Séparer "Studio" et "Standard"**  
+**R5 — Séparer "Studio" et "Standard"**
 QAAF Studio est l'implémentation de référence de CertiFi en finance quantitative. CertiFi est le standard méthodologique. Ces deux entités ont des cycles de vie différents : le standard évolue lentement et par consensus ; le Studio évolue rapidement par expérimentation. Les confondre dans un même document ou un même paquet fragilise la légitimité du standard.
 
 ---
@@ -192,5 +192,5 @@ La norme n'est pas ce qui est certifié. La norme est la méthode de certificati
 
 ---
 
-*CertiFi Vision Specification v0.1.0 — Avril 2026*  
+*CertiFi Vision Specification v0.1.0 — Avril 2026*
 *Produit après analyse critique adversariale de la conversation de co-construction*

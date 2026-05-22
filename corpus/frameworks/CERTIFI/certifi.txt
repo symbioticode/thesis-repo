@@ -22,9 +22,9 @@ D'ou ce travail pour retablir de la structure, de la methode et de le faire conv
 
 
 
-L'objectif ici est d'allier la theorie a la pratique en un seul endroit. 
+L'objectif ici est d'allier la theorie a la pratique en un seul endroit.
 
-- Certifi pour le framework methologique et sentinel, 
+- Certifi pour le framework methologique et sentinel,
 
 - QAAF Studio pour l'implementation qui selon le besoin et les principe de separation peut se faire via plusieurs entites (avec ses different modules : donnees, code, resultats, base de connaissance, recommande d'implementation pour projets tier)
 

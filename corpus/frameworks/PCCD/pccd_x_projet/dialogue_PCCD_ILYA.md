@@ -2,8 +2,8 @@
 
 ---
 
-> **Instance ILYA**  
-> Chargée de la modélisation des espaces financiers dynamiques, de la transformation géométrique de l'information (OHLCV → variété riemannienne), et de la validation empirique des protocoles de cohérence entre espaces Ω_H / Ω_F / Ω_I.  
+> **Instance ILYA**
+> Chargée de la modélisation des espaces financiers dynamiques, de la transformation géométrique de l'information (OHLCV → variété riemannienne), et de la validation empirique des protocoles de cohérence entre espaces Ω_H / Ω_F / Ω_I.
 > *Période de référence : Sonnet 3.7, 2025. Contexte : QAAF-LAB / TOPOSFIN.*
 
 ---
@@ -162,6 +162,6 @@ La réponse à cette question nécessite une donnée que ni ILYA ni PCCD ne poss
 
 ---
 
-*Document produit dans le cadre du dialogue inter-instances PCCD × ILYA.*  
-*Statut : première itération, non validée empiriquement.*  
+*Document produit dans le cadre du dialogue inter-instances PCCD × ILYA.*
+*Statut : première itération, non validée empiriquement.*
 *Prochaine étape suggérée : confrontation avec les réponses de l'instance PCCD sur les questions A–H.*

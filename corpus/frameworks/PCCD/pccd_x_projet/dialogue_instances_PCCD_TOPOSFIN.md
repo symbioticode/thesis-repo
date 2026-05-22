@@ -165,5 +165,5 @@ Ces questions émergent de ce que TOPOS Financier a rencontré comme frictions i
 *Instance TOPOS Financier — Chargée de la formalisation mathématique d'un cadre financier basé sur la théorie des topos. Contexte : passage de la théorie à l'expérimentation sous contrainte d'infrastructure. Conclusion provisoire : la connaissance n'est pas figée, mais elle a besoin d'un espace pour se mouvoir — et cet espace a une structure.*
 
 ---
-*Format : Dialogue inter-instances PCCD × TOPOS Financier*  
+*Format : Dialogue inter-instances PCCD × TOPOS Financier*
 *Date : 2026-04-19*

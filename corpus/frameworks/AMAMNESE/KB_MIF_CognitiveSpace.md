@@ -1,7 +1,7 @@
 # L'Espace Cognitif Partagé — Vers une Formalisation
 ## Ce qui reste à matérialiser pour simplifier la gestion de la connaissance
 
-**Date :** Avril 2026  
+**Date :** Avril 2026
 **Référence :** KB_MIF_Value_Analysis.md · PCCD Hypothesis v0.3 · RKA_Formalisation_v4.md
 
 ---
@@ -247,23 +247,23 @@ documentation). Chaque profil injecte seulement les Mindsets pertinents.
 Pour que l'anamnèse devienne un système plutôt qu'une pratique informelle, quatre
 composants doivent être formalisés :
 
-**COMPOSANT 1 — Le PROMPT_METHODOLOGIE v2 (adaptatif)**  
+**COMPOSANT 1 — Le PROMPT_METHODOLOGIE v2 (adaptatif)**
 Un template de bootstrap avec section ÉTAT ACTIF mis à jour à chaque session.
 Coût : un rituel de 10 min en fin de session pour mettre à jour l'état actif.
 Bénéfice : FR augmente de ~0.2 sur les sessions suivantes.
 
-**COMPOSANT 2 — Le tag de type de valeur sur les KB articles**  
+**COMPOSANT 2 — Le tag de type de valeur sur les KB articles**
 Un champ `type_valeur: RICH_PATTERNS | RICH_ANTIPATTERNS | RICH_DECISIONS | RICH_CONTEXT`
 sur chaque artefact KB.
 Coût : 30 secondes par article.
 Bénéfice : navigation thématique possible dans le corpus.
 
-**COMPOSANT 3 — Le catalogue de recadrages typifiés**  
+**COMPOSANT 3 — Le catalogue de recadrages typifiés**
 Un document `RECADRAGES_CATALOGUE.md` avec les types de déviation et leurs signaux préventifs.
 Coût : extraction et classification des Q7 existants (1-2h une fois).
 Bénéfice : détection préventive des dérives avant le seuil de recadrage.
 
-**COMPOSANT 4 — Les profils de Mindsets par phase**  
+**COMPOSANT 4 — Les profils de Mindsets par phase**
 Trois fichiers : `MINDSETS_DESIGN.md`, `MINDSETS_IMPLEMENTATION.md`, `MINDSETS_DEBUG.md`.
 Coût : 1h pour répartir les 15 Mindsets actuels.
 Bénéfice : injection de contexte pertinent, réduction du bruit.
@@ -307,5 +307,5 @@ C'est, au fond, ce que MIF-DQF a tenté de faire pour les métriques financière
 
 ---
 
-*ANAMNÈSE v0.1 · hypothèse de travail · Avril 2026*  
+*ANAMNÈSE v0.1 · hypothèse de travail · Avril 2026*
 *Status : PENDING — à soumettre aux instances concernées*

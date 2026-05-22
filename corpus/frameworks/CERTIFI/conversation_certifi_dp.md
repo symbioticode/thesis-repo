@@ -71,10 +71,10 @@ def compute_cnsr(returns_usd: pd.Series, rf_annual: float = 0.04) -> dict:
     rf_daily = (1 + rf_annual) ** (1/252) - 1
     excess = returns_usd - rf_daily
     sharpe = excess.mean() / excess.std() * np.sqrt(252)
-    
+
     # Version avec Rf=0% (crypto pure)
     sharpe_0 = returns_usd.mean() / returns_usd.std() * np.sqrt(252)
-    
+
     return {
         'cnsr_usd_fed': sharpe,
         'cnsr_usd_0': sharpe_0,
@@ -95,19 +95,19 @@ def deflated_sharpe_ratio(returns: pd.Series, N_trials: int, rf: float = 0.04) -
     N_trials = nombre de variantes testées dans la même étude.
     """
     from scipy.stats import skew, kurtosis, norm
-    
+
     T = len(returns)
     sr = sharpe_ratio(returns, rf) / np.sqrt(252)  # non annualisé
-    
+
     skew_ = skew(returns)
     kurt_ = kurtosis(returns, fisher=False)  # kurtosis de Pearson
-    
+
     # Seuil déflaté (approximation)
     sr0 = norm.ppf(1 - 1/(N_trials + 1)) / np.sqrt(T)
-    
+
     # Dénominateur corrigeant pour la non-normalité
     denom = np.sqrt(1 - skew_ * sr + (kurt_ - 3)/4 * sr**2)
-    
+
     dsr = norm.cdf((sr - sr0) * np.sqrt(T-1) / denom)
     return dsr
 ```
@@ -235,7 +235,7 @@ Le `DataLoader` intègre un **switch automatique** :
 - Si `mif-dqf` est installé → mode `DIAGNOSTIC` complet.
 - Sinon → stub minimal vérifiant trois points bloquants (index monotone, NaN < 5 %, données suffisantes).
 
-Les rapports DQF sont stockés et accessibles via `loader.dqf_reports`.  
+Les rapports DQF sont stockés et accessibles via `loader.dqf_reports`.
 **PAF et MÉTIS exigent que les données passent DQF avant exécution** (`PAFBundle` lève une exception si `status == "FAIL"`).
 
 ✅ **Cohérence avec la philosophie MIF** : les données sont validées en amont, le stub assure la portabilité du code sans dépendance externe, et la transition vers le package complet est transparente.
@@ -294,7 +294,7 @@ import pandas as pd as _pd   # SyntaxError
 **Correction** : `import pandas as _pd` (à corriger avant exécution).
 
 #### 5.2 Dépendance `mif-dqf` non encore publiée
-Le code est prévu pour fonctionner avec ou sans le package.  
+Le code est prévu pour fonctionner avec ou sans le package.
 **Risque** : tant que le package n’est pas disponible, la validation DQF reste limitée au stub. Cela n’empêche pas le développement, mais la certification finale (MIF) nécessitera le package complet.
 
 #### 5.3 Tests slow marqués `@pytest.mark.slow`
@@ -304,7 +304,7 @@ Ils sont exécutables séparément. Pour l’intégration continue, il faudra pr
 
 ### 6. Conclusion générale
 
-**Le développement de QAAF Studio 3.0 est parfaitement cohérent avec les spécifications initiales.**  
+**Le développement de QAAF Studio 3.0 est parfaitement cohérent avec les spécifications initiales.**
 Chaque couche remplit son rôle, les interfaces sont claires, les tests valident à la fois le comportement nominal et les cas adverses, et les résultats reproduisent fidèlement la Knowledge Base.
 
 **Prochaines étapes logiques :**
@@ -320,7 +320,7 @@ Alors mif-dqf est un composant (non essentiel) actuellement du studio qui fait p
 
 ## Synthèse : vers un écosystème de validation cohérent
 
-Vous avez parfaitement identifié le pattern : **DQF, MIF, PAF, MÉTIS, et QAAF Studio ne sont pas des îlots indépendants — ils constituent les couches successives d’une même chaîne de certification.**  
+Vous avez parfaitement identifié le pattern : **DQF, MIF, PAF, MÉTIS, et QAAF Studio ne sont pas des îlots indépendants — ils constituent les couches successives d’une même chaîne de certification.**
 Chaque couche répond à une question précise, et les réponses sont **cumulatives** : une stratégie ne peut être certifiée que si les données sous-jacentes, les métriques qui la composent, et la paire sur laquelle elle opère ont été validées au préalable.
 
 Voici une vision intégrée de l’écosystème, avec des noms stabilisés et une cartographie visuelle des relations.
@@ -416,8 +416,8 @@ Voici une vision intégrée de l’écosystème, avec des noms stabilisés et un
          DÉCISION : DÉPLOIEMENT / ARCHIVAGE / ITÉRATION
 ```
 
-**Note importante** :  
-- **PAF** se situe **entre** MIF et MÉTIS. Il utilise des métriques déjà certifiées MIF pour qualifier la paire **avant** de lancer la validation lourde MÉTIS.  
+**Note importante** :
+- **PAF** se situe **entre** MIF et MÉTIS. Il utilise des métriques déjà certifiées MIF pour qualifier la paire **avant** de lancer la validation lourde MÉTIS.
 - **MÉTIS** peut être exécuté directement après PAF (si PAF donne un feu vert), mais il suppose que les métriques sous‑jacentes ont passé MIF (sinon on risque de valider un signal construit sur des métriques biaisées).
 
 ---
@@ -434,9 +434,9 @@ Pour rendre cet écosystème opérationnel, on peut envisager une suite de **paq
 | `qaaf-metis` | `mif-core`, `qaaf-studio-engine` | Validation OOS de stratégies (Q1‑Q4). |
 | `qaaf-studio` | tous les précédents | Environnement intégré avec CLI, KB, et inventaire. |
 
-**Avantages** :  
-- Chaque paquet peut être versionné et publié indépendamment.  
-- Les praticiens peuvent utiliser uniquement `mif-dqf` pour nettoyer leurs données, sans adopter tout l’écosystème.  
+**Avantages** :
+- Chaque paquet peut être versionné et publié indépendamment.
+- Les praticiens peuvent utiliser uniquement `mif-dqf` pour nettoyer leurs données, sans adopter tout l’écosystème.
 - La séparation stricte des responsabilités empêche les dépendances circulaires.
 
 ---
@@ -496,7 +496,7 @@ Personnellement, je recommande **MIF Ecosystem** car il ancre la démarche dans 
 
 ## Conclusion
 
-Vous avez raison : les noms actuels (PAF, MÉTIS, DQF) sont des **briques fonctionnelles**, mais il manque encore la **vision architecturale d’ensemble** qui les relie.  
+Vous avez raison : les noms actuels (PAF, MÉTIS, DQF) sont des **briques fonctionnelles**, mais il manque encore la **vision architecturale d’ensemble** qui les relie.
 La proposition ci‑dessus établit une hiérarchie claire :
 
 - **DQF** → la fondation (données)
@@ -514,10 +514,10 @@ Genere ECOSYSTEM_ARCHITECTURE.md et place le dans son contexte (framework exista
 ----------------
 # MIF Ecosystem Architecture
 
-**Document Version**: 1.0  
-**Status**: Canonical Reference  
-**Last Updated**: 2026-04-15  
-**Authors**: QAAF Project Team  
+**Document Version**: 1.0
+**Status**: Canonical Reference
+**Last Updated**: 2026-04-15
+**Authors**: QAAF Project Team
 
 ---
 
@@ -599,7 +599,7 @@ The MIF Ecosystem aims to bring **institutional‑grade rigour** to individual q
 - **Two modes**: `CERTIFICATION` (strict, requires metadata) and `DIAGNOSTIC` (auto‑detection, advisory).
 - **PROD envelope**: signed identity envelope containing source ID, DQF version, timestamp, and signature (Ed25519 in Certification Mode).
 
-**Input**: Raw OHLCV data (CSV, API).  
+**Input**: Raw OHLCV data (CSV, API).
 **Output**: Certified data stream with PROD envelope, or `VOID` status if CORE checks fail.
 
 **Dependencies**: None (standalone Python package).
@@ -619,7 +619,7 @@ The MIF Ecosystem aims to bring **institutional‑grade rigour** to individual q
   - **Phase 3 (Integration)** – Pearson correlation < 0.6, mutual information < 0.30, VIF < 5, PCA dimensionality preserved, composite stability.
 - **MIF‑UID**: Unique identifier for each certification event, enabling traceability.
 
-**Input**: A metric function (Python callable) and DQF‑certified data.  
+**Input**: A metric function (Python callable) and DQF‑certified data.
 **Output**: A `certification.yaml` report with per‑phase verdicts, warnings, and a final status (`CERTIFIED`, `CERTIFIED_WITH_CONDITIONS`, or `FAILED`).
 
 **Dependencies**: `mif-dqf` (data must be DQF‑validated).
@@ -639,7 +639,7 @@ The MIF Ecosystem aims to bring **institutional‑grade rigour** to individual q
 - **Lump‑sum backtesting only** (avoids DCA bias).
 - **Uses MIF‑certified metrics** as building blocks.
 
-**Input**: A candidate signal (composed of MIF‑certified metrics), DQF‑certified data, and a split definition (IS/OOS).  
+**Input**: A candidate signal (composed of MIF‑certified metrics), DQF‑certified data, and a split definition (IS/OOS).
 **Output**: A `PAFReport` with verdicts for each direction and a global recommendation (e.g., `QUALIFIE_SOURCE_MINIMALE`).
 
 **Dependencies**: `mif-core` (for metric certification), `qaaf-studio-engine` (backtester, benchmarks).
@@ -659,7 +659,7 @@ The MIF Ecosystem aims to bring **institutional‑grade rigour** to individual q
   - **Q4 – Deflated Sharpe Ratio (DSR)**: Corrects for multiple testing; DSR ≥ 0.95 for PASS, 0.80‑0.95 for `SUSPECT_DSR`.
 - **All tests are performed after PAF qualification**, ensuring the pair and signal class are appropriate.
 
-**Input**: A signal function, DQF‑certified data, and a PAF report (optional but recommended).  
+**Input**: A signal function, DQF‑certified data, and a PAF report (optional but recommended).
 **Output**: A `METISReport` with per‑question results and a global verdict (`CERTIFIE`, `SUSPECT_DSR`, or `ARCHIVE_FAIL_<Q1/Q2/Q4>`).
 
 **Dependencies**: `mif-core`, `qaaf-studio-engine`.
@@ -678,7 +678,7 @@ The MIF Ecosystem aims to bring **institutional‑grade rigour** to individual q
 - **Layer 4 – Knowledge Base & Decision**: Tracks every tested hypothesis (lens), its PAF/MÉTIS verdict, and the rationale for archival or certification. Enforces rules like *never retest an archived lens without new justification*.
 - **CLI and Session Management**: Every experiment is a session with a unique ID, immutable split, and versioned configuration.
 
-**Input**: User hypotheses (signal functions).  
+**Input**: User hypotheses (signal functions).
 **Output**: Certified strategies ready for paper trading or deployment, along with a full audit trail.
 
 **Dependencies**: `mif-dqf`, `mif-core`, `qaaf-paf`, `qaaf-metis` (modular packaging).
@@ -817,7 +817,7 @@ Vous avez identifié le **pattern générateur** de tous les composants de l'éc
 | QAAF‑R : signal sophistiqué mais mécanisme incompris, surperformance due à la friction | « La paire est-elle adaptée à cette classe de méthodes ? D'où vient vraiment la performance ? » | **PAF** (Pair Adequacy Framework) | `qaaf-paf` |
 | H9+EMA60j : bon Sharpe OOS mais non robuste en walk‑forward | « Ce signal résiste-t-il à des splits temporels variés et au multiple testing ? » | **MÉTIS** (Method for Empirical Testing of Investment Signals) | `qaaf-metis` |
 
-**Principe fondamental** : Chaque composant est la **cristallisation d'une question de validation restée sans réponse** dans les workflows ad‑hoc.  
+**Principe fondamental** : Chaque composant est la **cristallisation d'une question de validation restée sans réponse** dans les workflows ad‑hoc.
 La méthodologie consiste à transformer cette question en un **paquet Python autonome** avec des entrées/sorties standardisées, des tests adversariaux, et une intégration en pipeline.
 
 ---
@@ -1269,7 +1269,7 @@ Voici la procédure à appliquer sur n'importe quel corpus de code de trading qu
 
 2. **Pour chaque thème, listez les fonctions clés** et essayez de formuler la **question** à laquelle elles répondent. (Ex. "Cette fonction vérifie que les prix ne contiennent pas de NaN".)
 
-3. **Regroupez les questions par niveau d'abstraction** : 
+3. **Regroupez les questions par niveau d'abstraction** :
    - Niveau 1 : Questions sur les données brutes (format, cohérence).
    - Niveau 2 : Questions sur les métriques élémentaires (calcul, biais).
    - Niveau 3 : Questions sur l'assemblage en stratégies (règles d'allocation, backtest).
@@ -1306,7 +1306,7 @@ Si QAAF Studio doit couvrir tout ses domaines alors il nous faudra construire un
 
 "extraction" = pattern lie a domaine <--> QAAF Studio domaine <--> ecosystem-paquet.
 
-Mais je dois deja un risque de circularite si les limites claires ne sont pas etablies. Quels sont les risques des toutes ses methodes de travail cites ou on veut lie des choses tout en disant qu'elles doivent etre autonomes ? 
+Mais je dois deja un risque de circularite si les limites claires ne sont pas etablies. Quels sont les risques des toutes ses methodes de travail cites ou on veut lie des choses tout en disant qu'elles doivent etre autonomes ?
 
 Mon objectif est de ne pas m'embourder dans des methologies non certifiees :-)
 --------------------------------
@@ -1698,23 +1698,23 @@ Exemples :
 
 ## 7. Feuille de route stratégique
 
-1. **Asseoir la crédibilité en finance quantitative**  
+1. **Asseoir la crédibilité en finance quantitative**
    Publier `mif-dqf` et `qaaf-studio` en open source, documenter les cas d'usage sur PAXG/BTC, et constituer une communauté de premiers utilisateurs.
 
-2. **Étendre l'écosystème des paquets CertiFi**  
+2. **Étendre l'écosystème des paquets CertiFi**
    Extraire progressivement `mif-core`, `qaaf-paf`, `qaaf-metis` du Studio, en garantissant leur indépendance et leur stabilité.
 
-3. **Formaliser les standards d'interopérabilité**  
+3. **Formaliser les standards d'interopérabilité**
    Définir un format de rapport CertiFi (YAML) reconnu par tous les paquets, et une API commune pour les outils de visualisation.
 
-4. **Explorer les extensions à d'autres domaines**  
+4. **Explorer les extensions à d'autres domaines**
    Identifier des partenaires académiques ou industriels dans la maintenance prédictive, la santé, ou l'énergie, pour adapter les couches CertiFi à leurs problématiques.
 
-5. **Créer une fondation ou un consortium**  
+5. **Créer une fondation ou un consortium**
    Pour garantir la pérennité et la neutralité des standards, transférer la gouvernance de CertiFi à une entité indépendante, à l'instar de la Linux Foundation ou de la Apache Software Foundation.
 
 ---
 
-**CertiFi ne vend pas de stratégies miracles. Il fournit la méthode et les outils pour que chacun puisse construire, tester et déployer ses propres systèmes avec une confiance mesurable et traçable.**  
+**CertiFi ne vend pas de stratégies miracles. Il fournit la méthode et les outils pour que chacun puisse construire, tester et déployer ses propres systèmes avec une confiance mesurable et traçable.**
 
 *La confiance ne se décrète pas ; elle se certifie.*

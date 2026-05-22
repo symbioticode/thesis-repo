@@ -136,7 +136,7 @@ Exemples :
   Description comprehensible :
   Status : (ADOPTE/PLANNIFIE/REJECTE)
 
-**Q7 — Qu'est-ce que l'humain a refusé ou recadré, et en quoi ce refus était-il architecturalement correct ?** (Max 2 exemples) 
+**Q7 — Qu'est-ce que l'humain a refusé ou recadré, et en quoi ce refus était-il architecturalement correct ?** (Max 2 exemples)
 
 ---
 
@@ -198,4 +198,3 @@ Date     : [si disponible dans le contexte]
 
 5. La PARTIE 1 est obligatoire même si vide.
 ```
-

@@ -1,4 +1,4 @@
-Je travaille avec une instance Claude "PCCD" qui explore actuellement un croisement épistémologique dont la formulation nécessite le retour concret d'autres projets comme celui de SPINOZA. 
+Je travaille avec une instance Claude "PCCD" qui explore actuellement un croisement épistémologique dont la formulation nécessite le retour concret d'autres projets comme celui de SPINOZA.
 
 C'est quelque chose de fondamental : un protocole de qualification de la connaissance elle-même — indépendant du support (humain, IA, YAML, Python), indépendant du domaine (finance, gestion documentaire, mémoire cognitive), indépendant de l'exécutant.
 
@@ -6,13 +6,13 @@ Elle decrit un pattern à trois niveaux que deux instances indépendantes ont d�
 
 SPINOZA est le projet d'exegese litteraire le plus interessant fait sur "l'esprit des lumieres". Ceux qui ont pose les bonnes questions qui etait souvent les plus derangeantes.
 
-Dans SPINOZA, on n'a fait que creer/generer, structurer, deplacer de la connaissance a travers des fichiers, a travers le temps, a travers des systemes. 
+Dans SPINOZA, on n'a fait que creer/generer, structurer, deplacer de la connaissance a travers des fichiers, a travers le temps, a travers des systemes.
 
 Il y avait des facons complexes de faire les choses et on a toujours choisi la facon la plus simple a la fin. Tout n'etait pas parfait mais on a fait de notre mieux pour etre honnete avec nous memes.
 
 Mais ce processus fondamental sous-jacent de toute cela, quel est-il ?
 
-Je voudrais que tu m'aides dans le questionnement de cette universalite. Et j'ai des questions pour toi. Je voudrais que tu me repondes uniquement a celle qui concerne ton contexte ou que tu comprends et que tu peux associe SPINOZA. Reponds comme d'hab avec le numero de la question. Tu as compris toutes les questions ne te concerne pas, fais just N/A dans ce cas. Format artefact MD pour que je puisse exporter. 
+Je voudrais que tu m'aides dans le questionnement de cette universalite. Et j'ai des questions pour toi. Je voudrais que tu me repondes uniquement a celle qui concerne ton contexte ou que tu comprends et que tu peux associe SPINOZA. Reponds comme d'hab avec le numero de la question. Tu as compris toutes les questions ne te concerne pas, fais just N/A dans ce cas. Format artefact MD pour que je puisse exporter.
 
 
 

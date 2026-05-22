@@ -1,7 +1,7 @@
 # Dialogue inter-instances — PCCD × MIF
 
-**Format** : Réponses de l'instance MIF au questionnaire `questionnaire_instances-pccd.md`  
-**Date** : 18 avril 2026  
+**Format** : Réponses de l'instance MIF au questionnaire `questionnaire_instances-pccd.md`
+**Date** : 18 avril 2026
 **Contexte** : Exploration inter-instances de l'universalité d'un pattern tripartite de qualification de la connaissance
 
 ---

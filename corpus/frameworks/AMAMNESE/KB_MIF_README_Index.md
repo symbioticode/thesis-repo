@@ -1,8 +1,8 @@
 # KB_MIF_TALK — README & Index Classifié
 ## Corpus de conversations · Projet MIF-DQF · Décembre 2025 → Février 2026
 
-**Consolidé le :** Avril 2026  
-**Couverture :** 10/10 conversations + PROMPT_METHODOLOGIE  
+**Consolidé le :** Avril 2026
+**Couverture :** 10/10 conversations + PROMPT_METHODOLOGIE
 **Corpus complet :** TALK-001 → TALK-010 intégrés
 
 ---
@@ -27,8 +27,8 @@ de signal dans cette dimension — non la qualité.
 ---
 
 ### TALK-001 · Session fondatrice
-**Tag :** `MIF-KB-001`  
-**Période :** 14 décembre 2025 → 2 janvier 2026  
+**Tag :** `MIF-KB-001`
+**Période :** 14 décembre 2025 → 2 janvier 2026
 **D-SIG :** 62 / GOOD · IMPROVING
 
 | DEV | PATTERN | IA | HUMAIN | META |
@@ -56,8 +56,8 @@ de frugalité n'était pas posé en amont.
 ---
 
 ### TALK-002 · Architecture & formats
-**Tag :** `MIF-KB-002`  
-**Période :** 25 décembre 2025 → 3 janvier 2026  
+**Tag :** `MIF-KB-002`
+**Période :** 25 décembre 2025 → 3 janvier 2026
 **D-SIG :** 71 / GOOD · IMPROVING
 
 | DEV | PATTERN | IA | HUMAIN | META |
@@ -84,8 +84,8 @@ de frugalité n'était pas posé en amont.
 ---
 
 ### TALK-003 · Implémentation DQF v4.8 → v4.9
-**Tag :** `MIF-KB-003`  
-**Période :** 3 → 11 janvier 2026  
+**Tag :** `MIF-KB-003`
+**Période :** 3 → 11 janvier 2026
 **D-SIG :** 81 / GOOD · IMPROVING
 
 | DEV | PATTERN | IA | HUMAIN | META |
@@ -117,8 +117,8 @@ La séparation "toi = infra, moi = business logic" comme contrat de collaboratio
 ---
 
 ### TALK-004 · DQF v1.0.0 Development
-**Tag :** `MIF-KB-004`  
-**Période :** 12 janvier 2026  
+**Tag :** `MIF-KB-004`
+**Période :** 12 janvier 2026
 **D-SIG :** 58 / DEGRADED · DEGRADING
 
 | DEV | PATTERN | IA | HUMAIN | META |
@@ -151,8 +151,8 @@ majeure. La session avec le D-SIG le plus bas du corpus.
 ---
 
 ### TALK-006 · Debugging Final & Production Release
-**Tag :** `MIF-KB-006`  
-**Période :** 19 janvier 2026  
+**Tag :** `MIF-KB-006`
+**Période :** 19 janvier 2026
 **D-SIG :** 78 / GOOD · IMPROVING_THEN_EXCELLENT
 
 | DEV | PATTERN | IA | HUMAIN | META |
@@ -182,8 +182,8 @@ Le refus de 103/104 comme "assez bon" est le moment de basculement qualité de t
 ---
 
 ### TALK-007 · Documentation complète + corrections finales
-**Tag :** `MIF-KB-007`  
-**Période :** 20 janvier → 3 février 2026  
+**Tag :** `MIF-KB-007`
+**Période :** 20 janvier → 3 février 2026
 **D-SIG :** 78 / GOOD · IMPROVING
 
 | DEV | PATTERN | IA | HUMAIN | META |
@@ -212,7 +212,7 @@ qualité externe ayant trouvé 7 incohérences manquées par humain + Claude.
 ---
 
 ### PROMPT_METHODOLOGIE_MIF · Template de rétrospective
-**Type :** Document méta / protocole de session  
+**Type :** Document méta / protocole de session
 **Statut :** Opérationnel depuis TALK-003
 
 | DEV | PATTERN | IA | HUMAIN | META |
@@ -329,8 +329,8 @@ l'humain a un horizon long (la dette qui s'accumule).
 ---
 
 ### TALK-005 · Anti-pattern "fake code" & refactoring DQF v0.9 → v1.0.0-rc1
-**Tag :** `MIF-KB-005`  
-**Période :** 18 janvier 2026 (~12h)  
+**Tag :** `MIF-KB-005`
+**Période :** 18 janvier 2026 (~12h)
 **D-SIG :** 48 / DEGRADED · RECOVERING — **le plus bas du corpus**
 
 | DEV | PATTERN | IA | HUMAIN | META |
@@ -376,8 +376,8 @@ valides produits · `enums.py` = seul artefact production réel de la session
 ---
 
 ### TALK-008 · Baseline validation & nettoyage final DQF v1.0.0
-**Tag :** `MIF-KB-008`  
-**Période :** 26 avril 2026 (~4h)  
+**Tag :** `MIF-KB-008`
+**Période :** 26 avril 2026 (~4h)
 **D-SIG :** 58 / GOOD · IMPROVING
 
 | DEV | PATTERN | IA | HUMAIN | META |
@@ -422,8 +422,8 @@ pytest-cov résolu par "ignorer" plutôt que résoudre
 ---
 
 ### TALK-009 · Reprise après pause — surcomplexification du contenant
-**Tag :** `MIF-KB-009`  
-**Période :** 26 avril 2026 · après 2 mois de pause  
+**Tag :** `MIF-KB-009`
+**Période :** 26 avril 2026 · après 2 mois de pause
 **D-SIG :** 28 / CRITICAL · DEGRADING — **score le plus bas du corpus avec TALK-005**
 
 | DEV | PATTERN | IA | HUMAIN | META |
@@ -461,9 +461,9 @@ par lire la SPECIFICATION du module, pas par générer du tooling.
 ---
 
 ### TALK-010 · Architecture DQF v1.1→v1.2 · Documentation officielle · Audit
-**Tag :** `MIF-KB-010`  
-**Période :** 26 avril 2026  
-**D-SIG :** 78 / GOOD · IMPROVING  
+**Tag :** `MIF-KB-010`
+**Période :** 26 avril 2026
+**D-SIG :** 78 / GOOD · IMPROVING
 **Instance :** Claude Sonnet 4.6 (première session Sonnet 4.6 du corpus)
 
 | DEV | PATTERN | IA | HUMAIN | META |
@@ -607,5 +607,5 @@ Les 5 types couvrent les 15 recadrages sans résidu.
 
 ---
 
-*KB_MIF_README_Index · Corpus complet 10/10 · Avril 2026*  
+*KB_MIF_README_Index · Corpus complet 10/10 · Avril 2026*
 *Voir KB_MIF_Value_Analysis.md · ANAMNESE_v0.3.md · rka_anamnese_node.yml*

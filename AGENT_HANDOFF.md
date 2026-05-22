@@ -34,23 +34,35 @@ bloquants: NON
 
 ---
 
-BRIEF CHARGÉ.
-Agent         : Jules
-Périmètre     : THÈSE
-Livrable J1   : ch0_genese.md, ch1_probleme.md
-Question avant démarrage : OUI — Les fichiers du corpus listés en SECTION 4 sont-ils disponibles ? Ils manquent dans le répertoire /corpus/frameworks/.
+## J0 — Jules (21 mai 2026)
 
----
-
-# AGENT_HANDOFF.md
+```yaml
 date: 2026-05-21
 agent: Jules
 jour: J0
 livrables_produits:
   - README.md : 65 lignes
   - MASTER_BRIEF.md : 230 lignes
-  - Structure de fichiers : 24 fichiers créés (incluant .gitignore, .gitkeep)
+  - Structure de fichiers : 24 fichiers créés
 questions_ouvertes:
-  - Où se trouvent les fichiers sources du corpus (PCCD, RKA, etc.) pour commencer J1 ? → Andrei
-prochaine_action: Démarrer J1 (Chapitres 0 et 1) dès réception du corpus.
-bloquants: OUI — Corpus manquant.
+  - Où se trouvent les fichiers sources du corpus ? → Andrei (RÉSOLU : synchronisés via git)
+prochaine_action: Démarrer J1.
+bloquants: NON
+```
+
+---
+
+## J1 — Jules (22 mai 2026)
+
+```yaml
+date: 2026-05-22
+agent: Jules
+jour: J1
+livrables_produits:
+  - thesis/ch0_genese.md : ~600 mots
+  - thesis/ch1_probleme.md : ~750 mots
+questions_ouvertes:
+  - Les chapitres respectent-ils le ton "première personne du pluriel de recherche" attendu ? → Andrei
+prochaine_action: Démarrer J2 (Chapitres 2 et 3).
+bloquants: NON
+```
