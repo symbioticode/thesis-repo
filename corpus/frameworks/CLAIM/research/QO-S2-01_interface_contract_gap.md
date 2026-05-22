@@ -1,10 +1,10 @@
 # QO-S2-01 — Gap du contrat d'interface minimal : preuves numériques et analyse
-**Projet** : IDEeS AP6-défi-13  
-**Question** : Existe-t-il un travail existant unifiant confiance DS + états épistémiques + statut illocutionnaire + fraîcheur + provenance dans un contrat d'interface unique pour systèmes multi-agents hétérogènes ?  
-**Statut** : **RÉSOLU — Gap confirmé, ancré sur POC reproductible**  
-**Version** : 2.2 — 18 mai 2026  
-**Précédente version** : v2.1 (18 mai 2026) — AM-04 v2 documentée, avertissement θ=0.35 insuffisant dans tableau  
-**Preuves** : S-01 `s01_tbm_minimal.py` · S-02 `s02_calibration_theta_v2.py` · S-03 `s03_validation_malformed.py` · S-04 `s04_fipa_contrast.py`  
+**Projet** : IDEeS AP6-défi-13
+**Question** : Existe-t-il un travail existant unifiant confiance DS + états épistémiques + statut illocutionnaire + fraîcheur + provenance dans un contrat d'interface unique pour systèmes multi-agents hétérogènes ?
+**Statut** : **RÉSOLU — Gap confirmé, ancré sur POC reproductible**
+**Version** : 2.2 — 18 mai 2026
+**Précédente version** : v2.1 (18 mai 2026) — AM-04 v2 documentée, avertissement θ=0.35 insuffisant dans tableau
+**Preuves** : S-01 `s01_tbm_minimal.py` · S-02 `s02_calibration_theta_v2.py` · S-03 `s03_validation_malformed.py` · S-04 `s04_fipa_contrast.py`
 **Reproductibilité** : Python 3.9+, stdlib uniquement, seed = 42 (S-02), zéro dépendance externe
 
 ---
@@ -23,7 +23,7 @@
 
 ## Verdict
 
-**Gap structurel confirmé.** Aucun standard existant n'obtient ✓ sur les cinq dimensions simultanément.  
+**Gap structurel confirmé.** Aucun standard existant n'obtient ✓ sur les cinq dimensions simultanément.
 Ce résultat, initialement argumenté de sources littéraires, est désormais **ancré sur une POC exécutable** :
 
 - S-01 démontre qu'un CLAIM structuré résout un problème de conflit inter-agents **que FIPA-ACL et les protocoles existants ne peuvent pas représenter** (pas de champ pour `m(∅)`).
@@ -307,10 +307,10 @@ Argument identique à v1.0. Le gap d'interface JDL est documenté par Steinberg 
 
 ---
 
-*Document produit le 18 mai 2026 — Version 2.2.*  
-*Preuves numériques : S-01, S-02 v2.0, S-03, S-04 exécutés et vérifiés ce jour.*  
-*Fragilité 1 résolue : S-04 démontre par exécution la lacune FIPA-ACL.*  
-*Fragilité 2 résolue : tableau des preuves colonne Note + avertissement ⚠ sur θ=0.35.*  
-*AM-04 v1 résolu. AM-04 v2 ouverte (frontière artificielle — NMT-3).*  
-*Autorité de validation : Andrei (PI).*  
+*Document produit le 18 mai 2026 — Version 2.2.*
+*Preuves numériques : S-01, S-02 v2.0, S-03, S-04 exécutés et vérifiés ce jour.*
+*Fragilité 1 résolue : S-04 démontre par exécution la lacune FIPA-ACL.*
+*Fragilité 2 résolue : tableau des preuves colonne Note + avertissement ⚠ sur θ=0.35.*
+*AM-04 v1 résolu. AM-04 v2 ouverte (frontière artificielle — NMT-3).*
+*Autorité de validation : Andrei (PI).*
 *Remplace : toutes les versions précédentes de QO-S2-01_interface_contract_gap.md.*

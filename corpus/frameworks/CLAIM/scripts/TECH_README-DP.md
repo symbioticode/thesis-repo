@@ -47,23 +47,23 @@ Pour que le travail soit reconnu, il faudra le comparer à une approche existant
 
 Voici une feuille de route pour les 3 à 6 prochains mois, avec des estimations de coûts et de temps.
 
-- **Phase 1 : Prototype et base comparative (« MVP amélioré », 1 mois, ≈0 $)**  
-    - **Tâches** : Migrer les scripts existants pour lire des données synthétiques plus réalistes (Kaggle, SAR). Mettre en place un référentiel de données (Git LFS ou dossier partagé).  
-    - **Coûts** : 0 $ (stockage sur Kaggle/ieee-dataport, CPU local).  
+- **Phase 1 : Prototype et base comparative (« MVP amélioré », 1 mois, ≈0 $)**
+    - **Tâches** : Migrer les scripts existants pour lire des données synthétiques plus réalistes (Kaggle, SAR). Mettre en place un référentiel de données (Git LFS ou dossier partagé).
+    - **Coûts** : 0 $ (stockage sur Kaggle/ieee-dataport, CPU local).
     - **Résultat** : Validation sur 3 jeux de données minimaux, code public.
 
-- **Phase 2 : Génération paramétrable et apprentissage du seuil (2 mois, ≈1 000-3 000 $ CA)**  
-    - **Tâches** : Développer le générateur paramétrable. Implémenter un modèle simple (ex. régression logistique) pour apprendre `θ_conflit`. Exécuter des benchmarks sur plusieurs graines aléatoires.  
-    - **Coûts** (hypothèse d'un étudiant/chercheur à temps partiel ou de l'utilisation de petits instances cloud) :  
-        - **Calculs (GPU)** : ≈500 $ (ex: quelques centaines d'heures sur Google Colab Pro).  
-        - **Personnel** : ≈1 500 $ (50h à 30 $/h).  
+- **Phase 2 : Génération paramétrable et apprentissage du seuil (2 mois, ≈1 000-3 000 $ CA)**
+    - **Tâches** : Développer le générateur paramétrable. Implémenter un modèle simple (ex. régression logistique) pour apprendre `θ_conflit`. Exécuter des benchmarks sur plusieurs graines aléatoires.
+    - **Coûts** (hypothèse d'un étudiant/chercheur à temps partiel ou de l'utilisation de petits instances cloud) :
+        - **Calculs (GPU)** : ≈500 $ (ex: quelques centaines d'heures sur Google Colab Pro).
+        - **Personnel** : ≈1 500 $ (50h à 30 $/h).
     - **Résultat** : Une version du système avec seuil adaptatif.
 
-- **Phase 3 : Benchmark OTAN et publication (2-3 mois, ≈5 000-15 000 $ CA)**  
-    - **Tâches** : S'aligner sur le standard OTAN de partage de données STANAG 4559 pour les formats d'entrée/sortie, permettant d'accéder à des données d'exercices réels comme CWIX. Participer à un hackathon OTAN (ex. TIDE Hackathon). En cas de non-sélection, utiliser les jeux de données OTAN existants (ex: 34 000 points de données d’émission électromagnétique).  
-    - **Coûts** (estimation pour un travail post-doctoral ou une petite entreprise) :  
-        - **Calculs** : ≈2 000-5 000 $ (instances cloud dédiées).  
-        - **Personnel** : ≈10 000-15 000 $ (200h à 50-75 $/h).  
+- **Phase 3 : Benchmark OTAN et publication (2-3 mois, ≈5 000-15 000 $ CA)**
+    - **Tâches** : S'aligner sur le standard OTAN de partage de données STANAG 4559 pour les formats d'entrée/sortie, permettant d'accéder à des données d'exercices réels comme CWIX. Participer à un hackathon OTAN (ex. TIDE Hackathon). En cas de non-sélection, utiliser les jeux de données OTAN existants (ex: 34 000 points de données d’émission électromagnétique).
+    - **Coûts** (estimation pour un travail post-doctoral ou une petite entreprise) :
+        - **Calculs** : ≈2 000-5 000 $ (instances cloud dédiées).
+        - **Personnel** : ≈10 000-15 000 $ (200h à 50-75 $/h).
     - **Résultat** : Validation dans un cadre reconnu par l'OTAN, soumission de l'approche à une conférence.
 
 ## 4. Conclusion et synthèse de la stratégie
@@ -267,8 +267,8 @@ Merci pour cette clarification. Je comprends maintenant que l’objectif n’est
 
 ## 1. Cohérence avec les attentes du client (MDN/FAC)
 
-Le défi demande :  
-- **Critère éliminatoire (CO)** : un modèle IA fusionnant ≥ 2 modalités hétérogènes.  
+Le défi demande :
+- **Critère éliminatoire (CO)** : un modèle IA fusionnant ≥ 2 modalités hétérogènes.
 - **Résultats souhaités** : propagation d’incertitude, explicabilité, traçabilité, intégration SWaP, résolution d’entités, politique de classification.
 
 La proposition de Claude (CVT) couvre bien ces axes :

@@ -1,6 +1,6 @@
 # TECH_README.md — Documentation technique complémentaire
-**Projet** : IDEeS AP6-défi-13 — Protocole d'échange épistémique  
-**Version** : 1.0 — 18 mai 2026  
+**Projet** : IDEeS AP6-défi-13 — Protocole d'échange épistémique
+**Version** : 1.0 — 18 mai 2026
 **Scope** : Scripts S-01, S-02, S-03 + module commun tbm_utils.py
 
 ---
@@ -63,7 +63,7 @@ VERDICT : ESCALADE HUMAINE REQUISE
 ============================================================
 ```
 
-> m(∅) = 0.7 × 0.6 = 0.42 — conflit entre Radar ({H1}) et SIGINT ({H2}).  
+> m(∅) = 0.7 × 0.6 = 0.42 — conflit entre Radar ({H1}) et SIGINT ({H2}).
 > 0.42 ≥ 0.30 : état Belnap **B**, escalade humaine obligatoire.
 
 **S-02 :**
@@ -101,11 +101,11 @@ BILAN : tous les cas de test passent — politique B.1 conforme.
 
 ### Étape 1 — Installer Python (si absent)
 
-- **Windows** : télécharger depuis https://www.python.org/downloads/  
-  Sélectionner "Python 3.12.x Windows installer (64-bit)".  
+- **Windows** : télécharger depuis https://www.python.org/downloads/
+  Sélectionner "Python 3.12.x Windows installer (64-bit)".
   ⚠️ Cocher **"Add Python to PATH"** lors de l'installation.
 
-- **macOS** : télécharger depuis https://www.python.org/downloads/  
+- **macOS** : télécharger depuis https://www.python.org/downloads/
   Ou via Homebrew : `brew install python3`
 
 - **Linux (Ubuntu/Debian)** : `sudo apt install python3`
@@ -121,7 +121,7 @@ Attendu : `Python 3.9.x` ou supérieur.
 ### Étape 3 — Préparer les fichiers
 
 1. Créer un dossier `idees_scripts` sur le Bureau (ou ailleurs).
-2. Y copier les 4 fichiers `.py` :  
+2. Y copier les 4 fichiers `.py` :
    `tbm_utils.py`, `s01_tbm_minimal.py`, `s02_calibration_theta.py`, `s03_validation_malformed.py`
 
 ### Étape 4 — Exécuter les scripts

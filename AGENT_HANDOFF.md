@@ -66,3 +66,21 @@ questions_ouvertes:
 prochaine_action: Démarrer J2 (Chapitres 2 et 3).
 bloquants: NON
 ```
+
+---
+
+## J2 — Jules (22 mai 2026)
+
+```yaml
+date: 2026-05-22
+agent: Jules
+jour: J2
+livrables_produits:
+  - thesis/ch2_convergence.md : ~700 mots
+  - thesis/ch3_formalisation.md : ~750 mots
+questions_ouvertes:
+  - Les références à la validation externe (FDA, NATO, NIH) sont-elles assez détaillées pour ch2 ? → Andrei
+  - Doit-on intégrer les nouveaux fichiers du répertoire corpus/frameworks/CLAIM/ dans ch3 dès maintenant ? → Andrei
+prochaine_action: Démarrer J3 (Chapitres 4 et 5 + Assemblage).
+bloquants: NON
+```
