@@ -1,0 +1,2 @@
+origin	https://github.com/symbioticode/thesis-repo (fetch)
+origin	https://github.com/symbioticode/thesis-repo (push)
