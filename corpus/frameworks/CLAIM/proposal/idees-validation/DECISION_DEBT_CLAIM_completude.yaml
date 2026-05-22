@@ -1,0 +1,340 @@
+# ============================================================
+# DECISION_DEBT — Branche BR-2026-CLAIM_completude
+# Projet IDEeS — IA Multimodale pour Decisions Situationnelles
+# Genere : 21 mai 2026 | Session : 12 | Statut : EN ATTENTE
+# Aucune integration avant session de decision Sprint 6
+# ============================================================
+
+meta:
+  branche: BR-2026-CLAIM_completude
+  source: CLAIM_completude_v0_3_consolidee.md (ANAMNESE)
+  revision_adverse: REV12B — 5 manquements, tous resolus en v0.3
+  deep_search: complete (Couches 1+2+3, corpus Jules verifie coherent)
+  date: "2026-05-21"
+  sprint_decision: Sprint 6
+  decisions_total: 11
+  questions_ouvertes: 3
+
+questions_ouvertes:
+  - id: QO-BR-01
+    question: >
+      La regle de retrocompatibilite §8 (PENDING_REVIEW + decision operateur)
+      est-elle tenable sous forte charge lors d'un changement de Theta impliquant
+      de nombreux CLAIMs ACTIVE simultanement ?
+    reponse_provisoire: >
+      Limite configurable max_pending_review_per_theta_change. Si depassee,
+      orchestrateur emet alerte C-07 et differe le changement (THETA_CHANGE_DEFERRED)
+      jusqu'a validation operateur.
+    bloque: D-11
+    difficulte: faible
+
+  - id: QO-BR-02
+    question: >
+      Le parametre validation_level1_timeout_ms (defaut 50 ms) est-il calibre
+      sur des architectures embarquees reelles ?
+    reponse_provisoire: >
+      50 ms est conservateur. Benchmarks VxWorks B-tree RAM : 1-5 ms sous charge
+      normale. Marge x10 acceptable NMT 2-3. Ref : Wind River VxWorks Real-Time
+      Performance — citeable sans mesure empirique propre.
+    bloque: D-02
+    difficulte: moyenne
+
+  - id: QO-BR-03
+    question: >
+      La transition QUARANTINED -> sortie uniquement par decision humaine est-elle
+      tenable dans un scenario de reconnexion massive ?
+    reponse_provisoire: >
+      Procedure QUARANTINE_RELEASE_BATCH avec chain_id_pattern (wildcard prefixe).
+      Sortie vers UNREGISTERED (pas REGISTERED) — cycle confiance progressive
+      recommence. A archiver dans T-BR-11.
+    bloque: D-08
+    difficulte: faible
+
+decisions:
+  - id: D-01
+    composant: "§1 Cycle de vie 7 statuts"
+    champs: [RECEIVED, VALID, ACTIVE, EXPIRED, SUPERSEDED, REJECTED, VOID]
+    pertinence_nmt2: haute
+    pertinence_nmt3: haute
+    solidite_formelle: bonne
+    risque_integration: faible
+    verdict_corpus: convergence_partielle
+    corpus_notes: "SUPERSEDED/VOID inedits — A2A, STANAG 4559, Dublin Core n'ont pas ces statuts"
+    valeur: elevee
+    statut: en_attente
+    options:
+      A: "Integrer en Partie B §B.3 (GitHub annex, pas dans le portail IDEeS)"
+      B: "Integrer uniquement SUPERSEDED et VOID, les autres etant implicites"
+      C: "Reporter post-J19 — angles morts existent mais ne bloquent pas NMT 2"
+    elements_tranchage:
+      - "SUPERSEDED et VOID absents de tous corpus consultes — valeur de contribution documentable"
+      - "Texte complet redige dans CLAIM_completude_v0_3_consolidee.md §1 — cout integration nul"
+      - "Impact portail IDEeS : NUL (Partie B = GitHub annex)"
+    dependances: [D-02]
+    destination_si_oui: "CLAIM_specification.md Partie B §B.3"
+
+  - id: D-02
+    composant: "§2 Cascade validation 3 niveaux"
+    niveaux: ["O(1) — verification structurelle", "O(log n) — lookup registre", "O(k) — validation semantique"]
+    parametre_ajoute: validation_level1_timeout_ms
+    default_timeout_ms: 50
+    comportement_timeout: "RECEIVED avec cause VALIDATION_TIMEOUT — file reessai 3 tentatives"
+    pertinence_nmt2: haute
+    pertinence_nmt3: haute
+    solidite_formelle: excellente
+    risque_integration: nul
+    verdict_corpus: convergence_forte_principe
+    corpus_notes: "DO-178C convergence forte principe — formalisation et timeout originaux"
+    valeur: elevee
+    statut: en_attente
+    options:
+      A: "Integrer en B.1 comme sous-section 'Ordre d'evaluation' (si B.1 est Partie B)"
+      B: "GitHub annex uniquement comme note d'implementation recommandee"
+      C: "Reporter post-J19"
+    elements_tranchage:
+      - "Valeur CCP-4 (SWaP) : complexite O(1)/O(log n)/O(k) = argument direct faisabilite embarquee"
+      - "validation_level1_timeout_ms repond au manquement M5 REV12B"
+      - "Si B.1 est Partie A portail : verifier limite caracteres avant decision"
+    dependances: [D-01]
+    question_ouverte: QO-BR-02
+    destination_si_oui: "B.1 sous-section ordre + argument CCP-4"
+
+  - id: D-03
+    composant: "§3a Freshness OBSERVE"
+    champ_ajoute: freshness_decay_rate
+    type: optionnel
+    formule: "alpha(delta_t) = exp(-lambda * delta_t)"
+    pertinence_nmt2: moyenne
+    pertinence_nmt3: null
+    solidite_formelle: bonne
+    risque_integration: faible
+    verdict_corpus: convergence_partielle
+    valeur: moyenne
+    statut: en_attente
+    options:
+      A: "Integrer en §A.3 comme champ optionnel (backward-compatible)"
+      B: "Reporter NMT 3 — Dt_valid binaire suffisant NMT 2"
+    elements_tranchage:
+      - "Champ optionnel = risque nul (orchestrateur ignore si absent)"
+      - "Valeur operationnelle reelle pour capteurs haute dynamique (radar)"
+      - "Calibration de lambda = travail de domaine non trivial"
+      - "Impact portail : verifier si §A.3 est Partie A ou Partie B"
+    dependances: [D-07]
+
+  - id: D-04
+    composant: "§3b Freshness INFER/DEDUCE"
+    description: "Regles de decroissance conditionnelle — validite liee aux sources ou aux premisses"
+    pertinence_nmt2: faible
+    pertinence_nmt3: haute
+    solidite_formelle: partielle
+    risque_integration: moyen
+    verdict_corpus: convergence_partielle
+    valeur: moyenne
+    statut: en_attente
+    recommandation_naturelle: archiver
+    options:
+      A: "Reporter NMT 3 — requiert §5 (graphe dependances) comme prerequis"
+      B: "Definir mecanisme conceptuellement en Partie B, implementation NMT 3"
+    elements_tranchage:
+      - "Dependance forte sur D-07 (§5 graphe) — §5 lui-meme NMT 3"
+      - "Valeur formelle reelle mais cout implementation eleve"
+    dependances: [D-07]
+    destination_si_reporte: "research/post_submission_ideas.md"
+
+  - id: D-05
+    composant: "§3c Freshness ASSUME — plafond orchestrateur"
+    parametre_ajoute: assume_max_validity_s
+    default_s: 3600
+    log_cause: ASSUME_CAPPED
+    repond_a: "M3 REV12B (gravite Moyenne)"
+    pertinence_nmt2: moyenne
+    pertinence_nmt3: null
+    solidite_formelle: bonne
+    risque_integration: nul
+    verdict_corpus: contribution_originale
+    valeur: moyenne
+    statut: en_attente
+    options:
+      A: "Integrer comme parametre de configuration orchestrateur (impact portail NUL)"
+      B: "Reporter NMT 3 — risque reel mais non bloquant NMT 2"
+    elements_tranchage:
+      - "Parametre vit dans config orchestrateur, pas dans spec CLAIM — impact portail NUL"
+      - "Cause ASSUME_CAPPED dans le log — champ transition_cause deja prevu"
+      - "Valeur securite reelle pour systemes certifiables DO-178C"
+    dependances: [D-09]
+
+  - id: D-06
+    composant: "§4 Detection stale storm + fermeture AM-03"
+    parametres:
+      - stale_window_duration
+      - stale_threshold_ratio
+      - stale_escalation_policy
+    fermeture: "AM-03 reclassifie NMT 4-5 -> NMT 3"
+    pertinence_nmt2: moyenne
+    pertinence_nmt3: haute
+    solidite_formelle: bonne
+    risque_integration: faible
+    verdict_corpus: convergence_forte_probleme
+    valeur: elevee
+    statut: en_attente
+    options:
+      A: "Integrer en Partie B §B.4 (GitHub annex) avec note fermeture AM-03"
+      B: "Reporter post-J19 — AM-03 NMT 4-5 est position defendable"
+    elements_tranchage:
+      - "3 parametres vivent dans config orchestrateur — impact portail NUL"
+      - "Fermeture AM-03 = signal positif evaluateur MDN"
+      - "Contre-exemple Loopy BP (layer_3) valide choix orchestrateur centralise — argument CCP-4"
+    dependances: [D-08]
+    destination_si_oui: "Partie B §B.4 + fermeture AM-03"
+
+  - id: D-07
+    composant: "§5 Graphe dependances inter-CLAIMs"
+    description: "Index leger chain_id -> [chain_ids dependants] maintenu par orchestrateur"
+    cout_sans_index: "O(n^2) a chaque expiration"
+    pertinence_nmt2: faible
+    pertinence_nmt3: haute
+    solidite_formelle: bonne
+    risque_integration: moyen
+    verdict_corpus: convergence_forte
+    corpus_notes: "Reseaux bayesiens, Belief Propagation Pearl — convergence forte structure"
+    valeur: moyenne
+    statut: en_attente
+    options:
+      A: "Definir conceptuellement en Partie B §B.5 comme prerequis NMT 3"
+      B: "Reporter entierement post-J19 avec archivage dans research/"
+    elements_tranchage:
+      - "Prerequis de D-04 (freshness INFER) — si D-04 reporte, D-07 peut l'etre aussi"
+      - "Convergence forte = argument CCP-1 si mentionne comme future direction"
+    dependances: [D-04]
+    destination_si_reporte: "research/post_submission_ideas.md"
+
+  - id: D-08
+    composant: "§6 Protocole nouvel agent"
+    etats: [UNREGISTERED, REGISTERED, QUARANTINED]
+    mecanisme: newcomer_trust_weight
+    type_discount: multiplicatif_sur_belief_mass
+    champ_log: trust_discount_applied
+    repond_a: "M2 REV12B (gravite Elevee)"
+    pertinence_nmt2: faible
+    pertinence_nmt3: haute
+    solidite_formelle: bonne
+    risque_integration: faible
+    verdict_corpus: convergence_partielle
+    corpus_notes: "FIPA partiel, TrustTrack tout-ou-rien — solution TBM avec discount progressif inedite"
+    valeur: elevee
+    statut: en_attente
+    options:
+      A: "Integrer en Partie B §B.5 (GitHub annex)"
+      B: "Reporter NMT 3 — tension existe mais evaluateurs NMT 2 n'en ont pas conscience"
+    elements_tranchage:
+      - "Mecanisme solide — resout M2 REV12B (auditabilite DO-178C via trust_discount_applied)"
+      - "Introduit notion de 'reputation agent' — presenter avec soin pour ne pas suggerer modification du CLAIM"
+      - "Solution TBM avec discount progressif inedite dans litterature consultee"
+    dependances: [D-07, D-06, D-09]
+    question_ouverte: QO-BR-03
+    destination_si_oui: "Partie B §B.5"
+
+  - id: D-09
+    composant: "§7 Log certifiable"
+    champs_obligatoires:
+      - log_id
+      - timestamp
+      - chain_id
+      - lifecycle_transition
+      - transition_cause
+      - m_empty_before
+      - m_empty_after
+      - belnap_state_after
+      - combination_rule
+      - sil_dal_level
+      - integrity_hash
+      - operator_notified
+    champ_optionnel: trust_discount_applied
+    convergence_externe:
+      - domaine: "Systemes certifiables pharmaceutiques"
+        source: "GxP FDA 21 CFR Part 11"
+        champs_convergents: [log_id, timestamp, lifecycle_transition, transition_cause, integrity_hash]
+      - domaine: "Standards ISR militaires"
+        source: "STANAG 4559 NSILI"
+        champs_convergents: [chain_id, timestamp, lifecycle_transition]
+      - domaine: "Audit blockchain genomique"
+        source: "NIH PMC7372873"
+        champs_convergents: [log_id, integrity_hash, transition_cause]
+    pertinence_nmt2: haute
+    pertinence_nmt3: null
+    solidite_formelle: excellente
+    risque_integration: nul
+    verdict_corpus: convergence_forte_3_domaines
+    valeur: elevee
+    statut: en_attente
+    risque_integration_note: "TP-02 existe deja — ne pas creer de document concurrent"
+    options:
+      A: "Ajouter note de convergence dans LOG_certifiable.md (3 lignes) — option A minimale"
+      B: "Creer LOG_certifiable_convergence.md dans research/"
+      C: "Reporter — LOG_certifiable.md v1.1 suffisant pour soumission"
+    elements_tranchage:
+      - "LOG_certifiable.md v1.1 existe — convergence valide ce qui existe, ne l'etend pas"
+      - "trust_discount_applied est extension dependant de D-08 (§6)"
+      - "Note de convergence (A) = modification la moins risquee et la plus defendable"
+    dependances: [D-08]
+    destination_si_oui: "Note dans LOG_certifiable.md"
+
+  - id: D-10
+    composant: "§8a HYPOTHESIS_OUT_OF_FRAME"
+    description: "6e cas de malformation — CLAIM dont l'hypothese est absente de la version courante de Theta"
+    comportement: "REJECTED + notification C-07"
+    pertinence_nmt2: haute
+    pertinence_nmt3: null
+    solidite_formelle: bonne
+    risque_integration: nul
+    verdict_corpus: absence_convergence
+    corpus_notes: "Absence confirmee = contribution prospective"
+    valeur: moyenne
+    statut: en_attente
+    options:
+      A: "Ajouter en B.1 (si B.1 est Partie B/GitHub annex = impact portail nul)"
+      B: "Documenter comme note comportementale dans Partie B §B.6"
+      C: "Reporter — cas improbable NMT 2 avec Theta statique"
+    elements_tranchage:
+      - "En NMT 2 avec Theta statique et |Theta| <= 20 : risque faible mais non nul (agent mal configure)"
+      - "Comportement simple a definir — coherent avec B.1 existant"
+      - "Impact portail : depend de l'emplacement exact de B.1 dans la spec"
+    dependances: [D-11]
+    destination_si_oui: "B.1 comme 6e cas malformation"
+
+  - id: D-11
+    composant: "§8b Gouvernance Theta versionnee"
+    champs_ajoutes:
+      - "Theta.version"
+      - "Theta.valid_from"
+      - "Theta.hypotheses"
+    regle_retrocompatibilite:
+      si_H_k_presente_dans_nouveau_theta: "CLAIMs ACTIVE maintenues, version mise a jour registre interne"
+      si_H_k_absente_du_nouveau_theta: "CLAIMs ACTIVE -> PENDING_REVIEW (cause THETA_VERSION_MISMATCH) — decision operateur"
+      void_automatique: false
+    pertinence_nmt2: faible
+    pertinence_nmt3: haute
+    solidite_formelle: bonne
+    risque_integration: moyen
+    verdict_corpus: absence_convergence
+    corpus_notes: "Absence confirmee = contribution prospective"
+    valeur: moyenne
+    statut: en_attente
+    options:
+      A: "Definir Theta.version comme optionnel NMT 2 + regle retrocompat. Partie B §B.6"
+      B: "Reporter NMT 3 — Theta statique en NMT 2, probleme hypothetique"
+      C: "Integrer uniquement la regle de retrocompatibilite (sans versioning complet)"
+    elements_tranchage:
+      - "En NMT 2 avec Theta statique : probleme hypothetique — reel en NMT 3"
+      - "Absence convergence = contribution prospective, argument CCP-2"
+    dependances: [D-10]
+    question_ouverte: QO-BR-01
+    destination_si_reporte: "research/post_submission_ideas.md"
+
+# Ce que cette branche ne touche PAS
+invariants_proteges:
+  - "Les cinq invariants du CLAIM"
+  - "La regle cardinale sur m(empty)"
+  - "La propriete stateless des agents"
+  - "La structure du CLAIM lui-meme (aucun champ ajoute sauf §3a optionnel)"
+  - "La Partie A soumise au portail IDEeS"

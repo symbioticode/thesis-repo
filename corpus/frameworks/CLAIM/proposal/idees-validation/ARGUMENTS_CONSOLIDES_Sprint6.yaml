@@ -1,0 +1,292 @@
+# ============================================================
+# ARGUMENTS_CONSOLIDES — Toutes branches IDEeS CLAIM
+# Projet IDEeS — IA Multimodale pour Decisions Situationnelles
+# Genere : 21 mai 2026 | Sprint 6 | Statut : EN ATTENTE — DECISION FINALE
+#
+# Ce fichier est la source de verite consolidee pour la session
+# de decision Sprint 6. Il regroupe les 22 decisions de 3 branches.
+# Branche 4/4 (BR-2026-ARCH-EVAL) absente — a integrer avant J14.
+# ============================================================
+
+meta:
+  date: "2026-05-21"
+  deadline_soumission: "2026-06-02"  # J19 = 2 juin
+  jours_restants: 12
+  sprint_courant: 6
+  decisions_totales: 22
+  branches_revisees: 3
+  branche_manquante: BR-2026-ARCH-EVAL
+  note: >
+    Aucune decision n'est prise dans ce fichier. Il structure les arguments
+    pour la session de decision Sprint 6 avec Andrei.
+
+# ============================================================
+# DECISIONS A EXECUTION IMMEDIATE (sans deliberation)
+# Risque NUL + Valeur ELEVEE
+# ============================================================
+
+execution_immediate:
+  description: "Ces decisions peuvent etre executees avant la session Sprint 6 — risque nul confirme"
+  items:
+    - id: D-09
+      branche: CLAIM_completude
+      action: "Ajouter note de convergence dans LOG_certifiable.md (3 lignes)"
+      contenu: >
+        ## Note de convergence externe (BR-2026 v0.2)
+        Les champs log_id, timestamp, lifecycle_transition, transition_cause et integrity_hash
+        convergent independamment avec : GxP FDA 21 CFR Part 11, STANAG 4559 NSILI,
+        et l'audit blockchain genomique NIH (PMC7372873).
+      duree_estimee_min: 10
+      validation_andrei_requise: false
+
+    - id: D-10
+      branche: CLAIM_completude
+      action: "Ajouter HYPOTHESIS_OUT_OF_FRAME comme 6e cas de malformation dans B.1"
+      comportement: "REJECTED + notification C-07"
+      duree_estimee_min: 20
+      validation_andrei_requise: false
+
+    - id: D-N02
+      branche: NeSy_Cyber
+      action: "Citer Hakim et al. 2025 Figure 11 dans Partie B §B.1"
+      citation: "Hakim et al. 2025, SPAR-4-SLR, 127 papers, kappa=0.89 — zeros sur 7 dimensions"
+      duree_estimee_min: 15
+      validation_andrei_requise: false
+
+    - id: D-N04
+      branche: NeSy_Cyber
+      action: "Ajouter note defensive ThreatKG/CTINexus (2 lignes) dans Partie B"
+      duree_estimee_min: 10
+      validation_andrei_requise: false
+
+    - id: D-N05
+      branche: NeSy_Cyber
+      action: "Reformulation hybride Assertion A dans CCP-4"
+      formulation: >
+        "...a l'interface L1->L2 du modele JDL (plus generalement, a toute interface
+        entre producteur d'information heterogene et orchestrateur)."
+      duree_estimee_min: 15
+      validation_andrei_requise: true  # Modification de CCP-4
+
+# ============================================================
+# DECISIONS A FORT IMPACT PORTAIL (deliberation courte)
+# ============================================================
+
+decisions_portail:
+  description: "Ces decisions touchent a la Partie A ou necessitent un arbitrage Andrei"
+  items:
+    - id: D-01
+      branche: CLAIM_completude
+      composant: "§1 Cycle de vie 7 statuts"
+      question_cle: "SUPERSEDED/VOID dans Partie B portail ou GitHub annex seulement ?"
+      recommandation: "Partie B GitHub annex — impact portail NUL"
+      valeur: elevee
+      risque: faible
+
+    - id: D-02
+      branche: CLAIM_completude
+      composant: "§2 Cascade validation + timeout"
+      question_cle: "B.1 est-il Partie A portail ou Partie B annex ?"
+      recommandation: "Si Partie B : integrer. Si Partie A : verifier limite caracteres d'abord."
+      valeur: elevee
+      risque: nul
+
+    - id: D-06
+      branche: CLAIM_completude
+      composant: "§4 Stale storm + fermeture AM-03"
+      question_cle: "Fermeture AM-03 dans Partie B sufficient ?"
+      recommandation: "Oui — signal positif evaluateur MDN sans alourdir portail"
+      valeur: elevee
+      risque: faible
+
+    - id: D-08
+      branche: CLAIM_completude
+      composant: "§6 Protocole nouvel agent + trust_discount_applied"
+      question_cle: "Mecanisme de discount dans Partie B portail ou GitHub annex seulement ?"
+      recommandation: "GitHub annex uniquement — mecanisme solide mais sensible a la formulation"
+      valeur: elevee
+      risque: faible
+      question_ouverte: QO-BR-03
+
+    - id: D-F01
+      branche: FORMULATION
+      composant: "ARG-F1 Belnap N/B (differenciateur principal)"
+      question_cle: "Valider la formulation ARG-F1 avant insertion dans CO-1"
+      valeur: elevee
+      risque: nul
+
+    - id: D-F04
+      branche: FORMULATION
+      composant: "ARG-F2 DS distribution — Partie A ou Partie B ?"
+      question_cle: "Trop technique pour 3000 car. si ARG-F1 occupe position principale ?"
+      recommandation: "Partie B si ARG-F1 valide — ARG-F2 en reserve"
+      valeur: elevee
+      risque: nul
+
+    - id: D-N01
+      branche: NeSy_Cyber
+      composant: "P1 G-I-A vers CO-1"
+      question_cle: "Formulation 'analogie architecturale' acceptable pour CO-1 ?"
+      valeur: elevee
+      risque: nul
+
+# ============================================================
+# DECISIONS NMT 3 — ARCHIVAGE AUTOMATIQUE POST-J19
+# ============================================================
+
+archivage_post_j19:
+  description: >
+    Ces decisions sont NMT 3 ou ont une dependance non resolue.
+    Elles seront archivees dans research/post_submission_ideas.md
+    sans deliberation sauf decision contraire d'Andrei.
+  destination: "research/post_submission_ideas.md"
+  items:
+    - id: D-04
+      branche: CLAIM_completude
+      composant: "§3b Freshness INFER/DEDUCE"
+      raison: "Dependance forte sur D-07 (§5 graphe) — §5 lui-meme NMT 3"
+
+    - id: D-07
+      branche: CLAIM_completude
+      composant: "§5 Graphe dependances inter-CLAIMs"
+      raison: "Prerequis de D-04 — cascade NMT 3"
+
+    - id: D-11
+      branche: CLAIM_completude
+      composant: "§8b Gouvernance Theta versionnee"
+      raison: "Theta statique en NMT 2 — probleme hypothetique"
+      question_ouverte: QO-BR-01
+
+    - id: D-F03
+      branche: FORMULATION
+      composant: "AGM revision de croyance"
+      raison: "Trop technique pour 3000 car. — reserve NMT 4-5"
+
+# ============================================================
+# DECISIONS CONDITIONNELLES (depend d'une autre decision)
+# ============================================================
+
+decisions_conditionnelles:
+  items:
+    - id: D-03
+      branche: CLAIM_completude
+      composant: "§3a Freshness OBSERVE (freshness_decay_rate)"
+      condition: "Si D-08 (§6) est integre en NMT 2, §3a peut l'etre aussi"
+      sinon: "Reporter NMT 3"
+
+    - id: D-05
+      branche: CLAIM_completude
+      composant: "§3c assume_max_validity_s"
+      condition: "Si D-09 (§7 log) est integre, ajouter cause ASSUME_CAPPED"
+      sinon: "Reporter NMT 3"
+
+    - id: D-N03
+      branche: NeSy_Cyber
+      composant: "P3 Dual-use vers §B.2"
+      condition: "Si Partie B §B.2 (calibration theta_conflit) existe"
+      sinon: "Note dans Partie B generique"
+
+# ============================================================
+# QUESTIONS OUVERTES BLOQUANTES
+# ============================================================
+
+questions_ouvertes:
+  - id: QO-BR-01
+    question: "Limite max_pending_review_per_theta_change necessaire ?"
+    bloque: D-11
+    reponse_provisoire: "Oui — THETA_CHANGE_DEFERRED si seuil depasse"
+    validation_requise: Andrei
+
+  - id: QO-BR-02
+    question: "Calibration validation_level1_timeout_ms sur RTOS embarque ?"
+    bloque: D-02
+    reponse_provisoire: "50 ms conservateur — ref Wind River VxWorks acceptable sans mesure propre"
+    validation_requise: Andrei
+
+  - id: QO-BR-03
+    question: "Sortie quarantaine par lot — procedure a definir ?"
+    bloque: D-08
+    reponse_provisoire: "QUARANTINE_RELEASE_BATCH avec chain_id_pattern — sortie vers UNREGISTERED"
+    validation_requise: Andrei
+
+# ============================================================
+# MANQUEMENTS CRITIQUES — A TRAITER AVANT J14
+# ============================================================
+
+manquements_critiques:
+  - id: M-CRIT-01
+    label: "Paralysie decisionnelle"
+    gravite: elevee
+    description: "22 decisions en pile avant Sprint 6 — risque de blocage sous pression temporelle"
+    solution: "Utiliser ce fichier YAML comme agenda structure de la session de decision"
+    echeance: "Avant J14"
+
+  - id: M-CRIT-02
+    label: "Branche 4/4 absente"
+    gravite: elevee
+    description: "BR-2026-ARCH-EVAL non revisee — tableau consolide incomplet"
+    solution: "Revue ou diagnostic minimal avant J14 (27 mai)"
+    echeance: "Avant J14"
+
+  - id: M-CRIT-03
+    label: "M1 REV12C ouvert — deep search non produit"
+    gravite: elevee
+    description: "Fondement epistemique CLAIM non valide par corpus externe independant"
+    solution: "Executer deep search methode Section 4 BR-2026-012 — livrable corpus_externe_v1.md"
+    mots_cles:
+      couche_1:
+        - '"belief function" "lifecycle" "orchestrator" certification'
+        - '"Dempster-Shafer" "agent" "stateless" "provenance" protocol'
+        - '"epistemic state" "heterogeneous sources" "interface contract" formal'
+      couche_2:
+        - '"message lifecycle" "valid" "expired" "superseded" formal specification OR standard'
+        - '"validation cascade" "early rejection" "computational cost" real-time certification'
+        - '"audit log" "epistemic state" "certifiable" DO-178C OR IEC-61508 format'
+    echeance: "Avant J14 — CRITIQUE"
+
+  - id: M-CRIT-04
+    label: "QO-S2-01 depuis BRs — sources primaires non verifiees"
+    gravite: moyenne
+    description: "QO-S2-01_interface_contract_gap.md produit depuis syntheses BR, pas sources primaires"
+    sources_primaires_requises:
+      - "Steinberg 1999"
+      - "Sarker 2021"
+      - "Hagos & Rawat 2024"
+      - "Hakim et al. 2025 (arxiv)"
+    echeance: "Avant J14 — sur chemin critique soumission"
+
+# ============================================================
+# STATISTIQUES CONSOLIDEES
+# ============================================================
+
+stats:
+  par_branche:
+    CLAIM_completude:
+      decisions: 11
+      valeur_elevee: 5
+      risque_nul: 5
+      nmt3_archivage: 3
+    FORMULATION:
+      decisions: 6
+      valeur_elevee: 5
+      risque_nul: 6
+      nmt3_archivage: 1
+    NeSy_Cyber:
+      decisions: 5
+      valeur_elevee: 3
+      risque_nul: 5
+      nmt3_archivage: 0
+    ARCH_EVAL:
+      decisions: null
+      note: "BRANCHE NON REVISEE — a integrer avant J14"
+
+  par_categorie:
+    execution_immediate: 5
+    deliberation_courte_portail: 7
+    archivage_automatique_nmt3: 4
+    conditionnelles: 3
+    arch_eval_inconnues: null
+
+  spec_claim_v11_modifiee: false
+  arguments_partie_a_disponibles: 6
+  arguments_partie_b_disponibles: 8
