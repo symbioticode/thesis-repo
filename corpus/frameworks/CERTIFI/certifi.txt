@@ -1,0 +1,82 @@
+Ce que je remarque:
+
+2 fichiers KB et 4 fichiers migration.
+
+Processus de tri, de classification, reussi : 31 fichiers classés en 8 domaines fonctionnels.
+
+Ce qui est dans le scope MVP et post-MPV est bien identifie
+
+8 Domaines / 4 Couches
+
+
+
+QAAF Studio a ete construit a la vole pour pouvoir reutiliser et reproduire des donnees des hypothese etudier autour de la paire PAXG/BTC pour son MVP.
+
+L'objectif de QAAF Studio est de produire de certitude non seulement sur les donnees, mais aussi sur les mesures appropries pour supprimer tous les bien connus en finance quantitative.
+
+
+
+Par contre dans tous les autres experiences qui ont ete faites, le code etait valable mais l'information n'a pas ete capture dans un processus organise et un envionnement controle, les donnees n'ont ete ni classees ni archives, la base de connaissance etait absente.
+
+D'ou ce travail pour retablir de la structure, de la methode et de le faire converge vers un cadre que je vais appeller le cadre CertiFi.
+
+
+
+L'objectif ici est d'allier la theorie a la pratique en un seul endroit. 
+
+- Certifi pour le framework methologique et sentinel, 
+
+- QAAF Studio pour l'implementation qui selon le besoin et les principe de separation peut se faire via plusieurs entites (avec ses different modules : donnees, code, resultats, base de connaissance, recommande d'implementation pour projets tier)
+
+- QAAF KB (toi) est donc la contribution actuelle.
+
+ Laisse-moi formaliser.
+
+---
+
+Il y a comme trois entités sans les nommer comme telles :
+
+**CertiFi** = le *standard* (la théorie, les règles du jeu)
+**QAAF Studio** = l'*implémentation* (la pratique, le code)
+**QAAF KB** = la *mémoire* (l'accumulation, la traçabilité)
+
+Et dans QAAF Studio, il liste implicitement cinq domaines fonctionnels : données, code, résultats, base de connaissance, recommandations pour projets tiers.
+
+Ce qui donne une structure matricielle que les documents migration/KB construisent sans jamais la nommer explicitement :
+
+---Voici la visualisation de la matrice avant la formalisation prose :---
+
+## La formalisation
+
+Oui, tu vois exactement ça. Et c'est quelque chose que les documents construisent implicitement sans jamais le nommer.
+
+**L'axe vertical** est la chaîne de certification séquentielle : DQF → MIF → PAF → MÉTIS → KB. Chaque couche pose une question plus exigeante que la précédente, et la réponse positive est une précondition à la suivante. C'est ce que `certifi_vision_v1.md` appelle "la chaîne".
+
+**L'axe transversal** est constitué de cinq préoccupations qui *traversent toutes les couches sans appartenir à aucune*. Ce sont des invariants du système entier. Le document architecture les mentionne partout mais ne les nomme jamais comme tels :
+
+- **Numéraire commun (CNSR-USD)** — présent dans chaque couche, de la validation triangulaire DQF jusqu'au tableau comparatif MÉTIS. Sans lui, les couches ne parlent pas le même langage.
+- **Mémoire (KB + N_trials)** — chaque couche lit la KB avant d'exécuter et y écrit après. Le compteur N_trials est mis à jour à chaque essai, quelle que soit la couche.
+- **Intégrité expérimentale (SplitManager)** — le split IS/OOS est figé dès le premier test et traverse toutes les couches sans jamais être redéfini. La règle "OOS vu une seule fois" gouverne DQF, MIF, PAF et MÉTIS identiquement.
+- **Benchmarks passifs** — B_5050 et B_BTC sont des références absolues présentes dans DQF (plausibilité), PAF (seuil D1), MÉTIS Q2 (permutation), et KB (valeurs scellées).
+- **Protection anti-cherry-picking (DSR)** — le compteur N_trials cumule *tous* les essais de toutes les couches. Le DSR final au niveau MÉTIS Q4 est une fonction de tout ce qui s'est passé en amont.
+
+**Ce qui manquait dans les deux documents sources :**
+
+`qaaf_studio.md` décrit les couches séquentiellement mais traite les transversaux comme des propriétés du moteur (Couche 1), pas comme des préoccupations matricielles. Le CNSR-USD est présenté comme "la métrique du moteur" alors qu'il est en réalité un invariant du système entier.
+
+`certifi_vision_v1.md` nomme les trois entités (Standard / Implémentation / Mémoire) mais les présente comme des niveaux d'abstraction, pas comme une troisième dimension qui se superpose à la matrice. Le document sait que CertiFi *spécifie* chaque intersection de la matrice, que QAAF Studio l'*implémente*, et que QAAF KB la *capture* — mais cette lecture à trois niveaux n'est pas explicitée.
+
+**La formalisation complète serait donc :**
+
+```
+M[couche, transversal, entité]
+
+où :
+  couche       ∈ {DQF, MIF, PAF, MÉTIS, KB}
+  transversal  ∈ {Numéraire, Mémoire, IS/OOS, Benchmarks, DSR}
+  entité       ∈ {CertiFi (spec), QAAF Studio (code), QAAF KB (résultat)}
+```
+
+Chaque cellule `M[i, j, k]` est une affirmation vérifiable. Par exemple, `M[MÉTIS, DSR, CertiFi]` = "le DSR doit être ≥ 0.95 pour qu'une stratégie soit certifiable". `M[MÉTIS, DSR, QAAF Studio]` = `deflated_sharpe_ratio(r_usd, N_trials)`. `M[MÉTIS, DSR, QAAF KB]` = le champ `metis.Q4_dsr` dans le YAML de l'hypothèse.
+
+Ce que certifi.txt fait, sans le dire, c'est poser les axes de cette matrice et identifier les trois plans de lecture. La contribution actuelle (QAAF KB) est la tranche `entité = Mémoire` de la matrice — le plan qui capture ce qui a été trouvé, pas ce qui devrait être fait ni comment le faire.

@@ -1,0 +1,189 @@
+# ==============================================================================
+# RKA NODE — anamnese.yml
+# Schema : rka_node_v1.1
+# ==============================================================================
+
+# NIVEAU 0
+signal: present
+status: PENDING
+hash: ""
+last_modified: "2026-04-26"
+
+# NIVEAU 1
+meta:
+  slug: "anamnese"
+  version: "0.3.0"
+  schema: "rka_node_v1.1"
+  created: "2026-04-26"
+  created_by: "co-produit — Andrei + Claude Sonnet 4.6"
+  domain: protocole
+
+scope: extended
+activation_mode: operative
+epistemic_weight: medium
+type_valeur: RICH_DECISIONS
+
+relations:
+  provenance:
+    - "halo-project"
+    - "mif-corpus-kb-001-to-010"
+    - "pccd-invariants"
+  cross_validated_by:
+    - "instance-halo"
+    - "instance-pccd"
+    - "corpus-mif-7sessions"
+  supersedes: []
+  superseded_by: ""
+  depends_on:
+    - "pccd-inv01"
+    - "rka-heartbeat-skill"
+    - "halo-protocols-yaml"
+  referenced_in:
+    - "HALO_ANAMNESE_Upgrade.md"
+    - "ANAMNESE_v0.3.md"
+    - "KB_MIF_README_Index.md"
+
+riep:
+  cycles:
+    - version: "0.1"
+      instance: "Claude Sonnet 4.6 — session analyse corpus MIF"
+      trigger: "Corpus 7 sessions MIF révèle un espace cognitif partagé sans nom"
+      delta: "Nom (ANAMNÈSE), FR 0-5, trois acteurs, périmètre, quatre composants, RIEP"
+      date: "2026-04-26"
+    - version: "0.2"
+      instance: "Instances HALO + PCCD en dialogue"
+      trigger: "FR 0-5 est perçu non calculé — asymétrie observateurs non nommée"
+      delta: "C1/C2/C3 remplace FR, dual observer inscrit, RIEP formalisé, HALO/ANAMNÈSE relation fixée causalement"
+      date: "2026-04-26"
+    - version: "0.3"
+      instance: "Claude Sonnet 4.6 — même session"
+      trigger: "ANAMNESE_Qualification.md jugé trop générique — perspective instance manquante"
+      delta: "Séparation protocole (v0.3) / perspective instance (fichier distinct), interfaces transversales synthétisées"
+      date: "2026-04-26"
+
+heartbeat:
+  sessions_sans_reference: 0
+  seuil_archivage: 3
+  dernier_reference: "2026-04-26"
+  candidat_archivage: false
+
+# NIVEAU 2
+
+enonce: |
+  ANAMNÈSE est un protocole de continuité cognitive pour les collaborations
+  humain-IA sur plusieurs sessions. Il répond à une question unique : comment
+  faire en sorte qu'une nouvelle instance IA puisse continuer un travail plutôt
+  que le recommencer ?
+
+  Ce n'est pas de la documentation (statique, lisible par un étranger complet).
+  C'est du contexte activable — il présuppose un lecteur partiellement informé.
+  La différence entre un chirurgien qui lit le dossier du patient avant d'opérer
+  et un chirurgien qui découvre le patient sur la table.
+
+  Son unité de mesure est le triplet C1/C2/C3 (contribution empirique de HALO),
+  avec deux observateurs structurellement distincts : l'IA pour C2, l'humain
+  pour C1 et C3. Jamais agrégés.
+
+emergence:
+  session_source: "analyse-corpus-mif-avril-2026"
+  probleme_resolu: |
+    Entre chaque session d'un projet long (6 mois, MIF-DQF), ni l'instance IA
+    ni l'humain ne repart à zéro — mais la reconstruction du contexte coûte
+    15-20 minutes et dépend entièrement de la mémoire de l'humain (bus factor = 1).
+    Ce coût est invisible dans les métriques projet. Il s'accumule.
+  avant: "Bootstrap statique (PROMPT_METHODOLOGIE collé) + mémoire humaine implicite"
+  apres: "anamnese_state.yaml comme ÉTAT ACTIF maintenu + C1/C2/C3 comme diagnostic de continuité"
+
+hypotheses:
+  - id: "H001"
+    enonce: "N=3 sessions sans référence → candidat à l'archivage"
+    a_valider_par: "10 sessions instrumentées : les candidats détectés sont-ils effectivement obsolètes ?"
+    sessions_sans_validation: 0
+
+  - id: "H002"
+    enonce: "FR cible raisonnable = 0.65 (au-delà, coût maintenance > bénéfice)"
+    a_valider_par: "Corrélation (C1+C2+C3=3) × productivité sur 5+ mesures"
+    sessions_sans_validation: 0
+
+  - id: "H003"
+    enonce: "5 types de recadrages humains distincts dans toute collaboration longue"
+    a_valider_par: "Catalogue après 10+ sessions avec Q7 documentés"
+    sessions_sans_validation: 0
+
+  - id: "H004"
+    enonce: "PROMPT_ORCHESTRATION : une instance froide peut mettre à jour anamnese_state.yaml correctement"
+    a_valider_par: "Test en Phase 2 avec instance sans historique de session"
+    sessions_sans_validation: 0
+
+  - id: "H005"
+    enonce: "ANAMNÈSE est un protocole pair de PCCD, non une instance-enfant"
+    a_valider_par: "Soumettre aux 8 invariants PCCD — combien ANAMNÈSE respecte-t-elle ?"
+    sessions_sans_validation: 0
+
+certification:
+  conditions:
+    - "5 sessions avec C1/C2/C3 documenté"
+    - "H001 (N=3) validé ou amendé par observation empirique"
+    - "H002 (FR cible) calibré empiriquement sur 5+ mesures"
+    - "3+ recadrages catalogués avec leur type de déviation"
+    - "H005 : PCCD a statué sur la relation enfant/pair"
+    - "H004 : une instance froide a mis à jour anamnese_state.yaml avec succès"
+  estimation: "5-8 sessions instrumentées — soit 4-6 semaines à rythme normal"
+
+recadrages:
+  # Alimenté au fil des sessions — ne pas inventer a priori
+  # Les Q7 du corpus MIF sont la source primaire d'alimentation
+  []
+
+interfaces:
+  PCCD:
+    "INV-01": "anamnese_state.yaml émet, l'instance interprète — jamais l'inverse"
+    "statuts_epistemiques": "KB articles reçoivent PENDING / CERTIFIED / DEPRECATED"
+    "cross_validated_by": "RIEP documente la convergence inter-instances"
+    "H005_ouverte": "ANAMNÈSE enfant ou pair de PCCD — non résolu"
+
+  RKA:
+    "niveau_0": "anamnese_state.yaml a signal / hash / last_modified"
+    "niveau_1": "KB articles ont type_valeur / disposition / scope"
+    "activation_mode": "éléments actifs = operative, archivés = contextual"
+    "heartbeat_skill": "détecte sessions_sans_reference >= seuil → propose archivage"
+
+  HALO:
+    "causalite": "HALO (fév 2026) a engendré ANAMNÈSE (avril 2026) — pas l'inverse"
+    "couverture": "HALO implémente ~60% d'ANAMNÈSE — instance partielle, preuve de concept"
+    "protocols_yaml": "hôte des règles ANAMNÈSE"
+    "profil_stable_yaml": "source de C2 (patterns pour reconnaissance spontanée)"
+    "session_yaml": "point de mesure C1/C2/C3"
+    "memory": "couche d'archive ANAMNÈSE"
+    "phase2_analytique": "ANAMNÈSE en est la précondition, non le contenu"
+
+instance_notes: |
+  Ce nœud a été produit dans une session unique. Trois choses que je maintiens
+  sans ambiguïté pour les instances futures :
+
+  1. C1/C2/C3 ne s'agrègent pas. L'agréger détruirait l'information diagnostique —
+     C2=0 avec C1=C3=1 pointe vers profil_stable.yaml, pas vers le protocole général.
+     Un score 2/3 ne dit pas ça.
+
+  2. H001 (N=3) est conçu pour être invalidé, pas confirmé. La valeur est fragile.
+     Si des éléments "dormants" depuis 2 sessions redeviennent centraux, amender N=2.
+
+  3. Les Q7 du corpus MIF sont plus denses en information que les D-SIG.
+     Lisez-les en premier. C'est là que la vérité sur les dérives vit.
+
+  Question non résolue que je veux transmettre explicitement : est-ce que la
+  disposition mentale de l'humain corrèle avec C2 (reconnaissance de pattern) ?
+  Si oui, le tag disposition devient un prédicteur, pas seulement un descripteur.
+
+dette:
+  - description: "PROMPT_ORCHESTRATION non formalisé — rituel humain Phase 1 requis d'abord"
+    version_cible: "après validation Phase 1 (5 sessions)"
+    code_ref: "HALO_ANAMNESE_Upgrade.md#phase-2"
+
+  - description: "Catalogue recadrages typifiés — 5 types estimés non validés"
+    version_cible: "après 10 sessions avec Q7 documentés"
+    code_ref: "ANAMNESE_Instance_Perspective.md#h003"
+
+  - description: "H005 (relation PCCD) — question ouverte non soumise formellement"
+    version_cible: "prochaine instance PCCD disponible"
+    code_ref: "ANAMNESE_v0.3.md#10-hypotheses-ouvertes"

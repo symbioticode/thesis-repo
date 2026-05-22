@@ -1,0 +1,238 @@
+# ==============================================================================
+# RKA NODE TEMPLATE v4.0
+# Reflective Knowledge Architecture · Avril 2026
+# Synthèse : PCCD + AP + EREK + MIF
+#
+# USAGE : Copier ce fichier, renommer en project.relations.yml
+#         Remplir niveau 0 et niveau 1 en priorité
+#         Niveau 2 (contenu sémantique) dans le fichier source
+#         Champs optionnels marqués [OPT]
+#         Champs SYNERGIA marqués [SYNERGIA] — optionnels hors écosystème Anthill
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# NIVEAU 0 — Signal vital
+# Lisible sans ouvrir le fichier. Trois champs. Décision en une seconde.
+# ------------------------------------------------------------------------------
+signal: present        # present | absent | void
+hash: ""               # md5 du contenu au moment de la dernière certification
+last_modified: ""      # timestamp ISO 8601
+
+# ------------------------------------------------------------------------------
+# NIVEAU 1 — Contexte minimal (frontmatter)
+# Lisible sans parser le contenu. Décision de lecture complète ici.
+# ------------------------------------------------------------------------------
+
+# --- Identité ---
+slug: ""               # identifiant unique kebab-case (ex: aurora-bsc-protocol)
+role: container        # container | transform
+status: PENDING        # PENDING | UNCERTIFIED | CERTIFIED | VALID_INACTIVE |
+                       # TRANSITIONING | DEPRECATED | SUPERSEDED | VOID
+created: ""            # YYYY-MM-DD
+author: ""             # humain, IA, ou "collaborative"
+provenance: ""         # origine du contenu — dialogue, session, fichier source
+activation_mode: operative  # operative | contextual
+
+# --- Classification ---
+domain: ""             # domaine principal (ex: finance, infrastructure, methodology)
+keywords: []           # max 8 mots-clés
+summary: ""            # une phrase — ce que ce nœud est et fait
+
+# --- Épistémologie ---
+epistemic_weight:
+  sources: 0           # nombre de sources ou instances ayant contribué
+  confidence: low      # low | medium | high
+validation_mode: internal   # internal | empirical
+uncertainty_regime: local   # local | statistical | dynamic
+
+cross_validated_by: []      # slugs ou domaines ayant confirmé indépendamment
+provenance_gap:             # [OPT] si status: UNCERTIFIED
+  missing: false
+  reconstructed: false
+  confidence: ""
+
+refined_by: []              # [RIEP] raffinements cross-instances documentés
+# format :
+# - instance: ""            # slug ou nom de l'instance qui a proposé le raffinement
+#   trigger: ""             # gap empirique qui a déclenché le raffinement
+#   version: ""             # version produite par ce raffinement (ex: v0.2)
+#   date: ""                # YYYY-MM-DD
+
+# --- Relations positives ---
+relations: []          # slugs de nœuds liés positivement
+
+# --- Tensions ---
+tension_with: []       # [OPT] slugs en contradiction documentée
+
+# --- Contraintes ---
+constraints: []        # anti-patterns, règles d'arrêt, limites connues
+
+# --- Cycle de vie ---
+superseded_by: ""      # [OPT] slug du nœud successeur — si status: SUPERSEDED
+
+# ------------------------------------------------------------------------------
+# NIVEAU 1 ÉTENDU — Apports AP + EREK
+# Optionnel mais recommandé pour les nœuds de protocoles ou de projets
+# ------------------------------------------------------------------------------
+
+# --- Genèse par contrainte [AP] ---
+genesis:
+  practical_catalyst: ""     # quel problème réel a forcé ce nœud à exister ?
+  key_constraint: ""         # limite matérielle, théorique, ou organisationnelle
+  breakthrough_insight: ""   # l'idée qui a tout changé, mesurable si possible
+  emergence_trace:           # [OPT] trace AP : itération 1 → N
+    - iteration: 1
+      attempt: ""
+      outcome: ""
+    # ajouter iterations jusqu'à convergence
+
+# --- Position dans l'écosystème [EREK] ---
+ecosystem_position:
+  layer: ""            # infrastructure | protocol | methodology | application | vision
+  function: ""         # coordination | computation | validation | knowledge | interface
+
+# --- Ancres philosophiques [SYNERGIA — OPT] ---
+embodies: []
+# format :
+# - principle: FRUGALITY    # FRUGALITY | DECENTRALIZATION | EMERGENCE | ANTIFRAGILITY | TRANSCENDENCE
+#   aspect: DATA_QUALITY_FIRST
+#   evidence: ""            # preuve mesurable
+
+# --- Connexions déclarées [EREK] ---
+connections:
+  built_upon: []
+  # format :
+  # - id: ""               # slug ou nom du projet/nœud parent
+  #   aspect: ""           # infrastructure | methodology | theory | data
+  #   dependency: hard     # hard | soft | conceptual
+  #   confidence: 0.9      # 0.0 – 1.0
+
+  enables: []
+  # format :
+  # - id: ""
+  #   what: ""             # capacité débloquée
+
+  shares_patterns_with: []
+  # format :
+  # - id: ""
+  #   pattern: ""
+  #   divergence: ""       # comment les implémentations diffèrent
+
+  tension_declared: []
+  # format :
+  # - id: ""
+  #   nature: ""           # nature de la tension ou contradiction
+
+# --- Actifs réutilisables ---
+reusable_assets:
+  protocols: []
+  # format :
+  # - name: ""
+  #   status: stable       # experimental | beta | stable | production
+  #   adoptable_by: []
+  #   prerequisites: []
+
+  patterns: []
+  # format :
+  # - name: ""
+  #   description: ""
+  #   antipattern: ""      # ce qu'il remplace avantageusement
+  #   context: ""          # quand l'utiliser
+
+# ------------------------------------------------------------------------------
+# NIVEAU 1 ÉTENDU — Certification [MIF-inspired]
+# ------------------------------------------------------------------------------
+certification:
+  phase_0_isolation: false   # fonctionne sur données synthétiques / cas isolé ?
+  phase_1_generalization: false  # tient hors du contexte d'origine ?
+  phase_2_transfer: false    # applicable à d'autres domaines ?
+  phase_3_production: false  # stable en usage continu ?
+  overall_score: 0.0         # 0.0 – 1.0
+
+  human_reviewed: false
+  reviewed_by: ""
+  review_date: ""
+  integrity_signature: ""    # SHA-256 du contenu au moment de la certification
+
+# --- Limites déclarées ---
+known_limitations: []
+# format :
+# - id: LIM-01
+#   description: ""
+#   mitigation: ""          # [OPT]
+
+# ------------------------------------------------------------------------------
+# NIVEAU 1 ÉTENDU — Réflexion
+# La question que ni l'IA ni le code ne peut répondre seul.
+# ------------------------------------------------------------------------------
+reflection:
+  success_criteria: []
+  # format :
+  # - criterion: ""
+  #   target: ""
+  #   achieved: false
+
+  failures_learned: []
+  # format :
+  # - attempt: ""
+  #   why_failed: ""
+  #   lesson: ""
+
+  future_vision:
+    next_phase: ""           # ce qui vient après
+    dream_state: ""          # [OPT] potentiel ultime — espace CORAIL
+
+  philosophical_note: ""     # [OPT] pourquoi ça compte, au-delà du code
+
+# ------------------------------------------------------------------------------
+# METADATA — Pour RAG et indexation
+# ------------------------------------------------------------------------------
+metadata:
+  rka_schema_version: "4.0"
+  generated_by: ""           # claude | gpt4 | gemini | human | collaborative
+  last_updated: ""           # YYYY-MM-DD
+  update_frequency: manual   # manual | on_release | continuous
+  archive_ref: ""            # [OPT] chemin vers archive ou README source
+
+  search_hints: []           # max 5 — questions auxquelles ce nœud répond
+  # ex: "Comment optimiser la mémoire d'un backtest ?"
+
+  related_documents: []
+  # format :
+  # - path: ""
+  #   relevance: 0.9         # 0.0 – 1.0
+
+# ==============================================================================
+# EXEMPLE MINIMAL VALIDE
+# Un nœud certifiable avec les seuls champs obligatoires
+# ==============================================================================
+#
+# signal: present
+# hash: "d41d8cd98f00b204e9800998ecf8427e"
+# last_modified: "2026-04-19T00:00:00Z"
+# slug: "aurora-bsc-protocol"
+# role: container
+# status: CERTIFIED
+# created: "2024-11-15"
+# author: "collaborative"
+# provenance: "BOME optimization session · Andrei + Claude"
+# activation_mode: operative
+# domain: "distributed-computing"
+# keywords: ["checkpoint", "memory", "frugality", "BSC", "distributed"]
+# summary: "Protocole de checkpoint frugal pour calculs distribués sur hardware contraint."
+# epistemic_weight:
+#   sources: 3
+#   confidence: high
+# validation_mode: empirical
+# uncertainty_regime: local
+# metadata:
+#   rka_schema_version: "4.0"
+#   generated_by: "collaborative"
+#   last_updated: "2026-04-19"
+#
+# ==============================================================================
+# FIN DU TEMPLATE
+# RKA v4.0 · 2026-04-19 · Andrei + Claude Sonnet 4.6
+# Voir RKA_Formalisation_v4.md pour le protocole
+# Voir RKA_Synthese_Discussion.md pour le contexte
+# ==============================================================================
