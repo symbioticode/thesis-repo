@@ -1,0 +1,167 @@
+# ============================================================
+# DECISION_DEBT — Branche BR-2026-CLAIM_vs_NeSy-Cyber
+# Projet IDEeS — IA Multimodale pour Decisions Situationnelles
+# Genere : 21 mai 2026 | Session : 12bis | Statut : EN ATTENTE
+# ============================================================
+
+meta:
+  branche: BR-2026-CLAIM_vs_NeSy-Cyber
+  verdict_global: "INTEGRATION PARTIELLE RECOMMANDEE — usage argumentatif uniquement, spec CLAIM v1.1 inchangee"
+  date: "2026-05-21"
+  sprint_decision: Sprint 6
+  decisions_total: 5
+  spec_modifiee: false
+  note_gouvernance: >
+    Ce rapport est produit en branche isolee. Seul Andrei peut autoriser la fusion.
+
+corpus_sources:
+  - id: hakim_2025
+    reference: "Hakim et al. 2025 — NeSy-Cyber Survey"
+    arxiv: "arXiv soumis 2025"
+    methode: "SPAR-4-SLR — 127 papers, kappa=0.89"
+    figure_cle: "Figure 11 — matrice de couverture benchmarks NeSy x exigences specifiques"
+    zeros_confirmes:
+      - causal_reasoning
+      - multi_agent_testing
+      - instructibility_assessment
+      - alignment_verification
+    note: "Meilleure preuve empirique du gap disponible — source peer-reviewed citeable"
+
+  - id: gia_framework
+    reference: "G-I-A Framework — Instructibility"
+    formule: "I(theta, K, H) = E[Adaptation(delta_theta_h, delta_K_h)]"
+    description: "Mesure l'adaptation a un feedback humain — intra-agent, pas inter-agents"
+
+  - id: hptsa_vulnbot
+    reference: "HPTSA (42% zero-day a 24$/exploit, pass@5) + VulnBot (30.3% vs 9.09% baseline)"
+    domaine: "Agents NeSy offensifs cyber autonomes"
+    pertinence: "Justification empirique de la regle cardinale m(empty) >= theta_conflit"
+
+  - id: threatkg_ctinexus
+    reference: "ThreatKG / CTINexus"
+    description: "Graphes de connaissances CTI — triplets (entite, relation, entite)"
+    distinction_claim: >
+      ThreatKG/CTINexus partagent des faits (triplets). CLAIM transmet des masses
+      de croyance sur un cadre de discernement Theta, avec m(empty) explicite et
+      statut illocutoire. Distinction formelle demontrable en 2 lignes mathematiques.
+
+decisions:
+  - id: D-N01
+    proposition: P1
+    composant: "CLAIM comme piece manquante du G-I-A"
+    convergence: forte
+    description: >
+      Le G-I-A opere intra-agent (Instructibility = analyste -> systeme).
+      Le CLAIM opere inter-agents. Ce n'est pas la meme couche.
+      CLAIM est l'analogue architectural a une couche superieure — pas une extension
+      du G-I-A mais une condition necessaire pour que la dimension I opere en contexte
+      distribue.
+    score_pertinence_nmt2: 4
+    score_solidite_formelle: 3
+    score_risque_integration: 1
+    usage: rhetorique
+    verdict: "GARDER — usage rhetorique"
+    destination: "CO-1 (formulation 'epistemique') + Partie A mention"
+    formulation_recommandee: >
+      Ne pas presenter G-I-A comme cadre principal — le mentionner comme confirmation
+      externe. "CLAIM constitue la couche de communication inter-agents que le
+      framework G-I-A presuppose sans la formaliser."
+    statut: en_attente
+
+  - id: D-N02
+    proposition: P2
+    composant: "Figure 11 — 0% sur 7 dimensions"
+    convergence: directe
+    description: >
+      Figure 11 de Hakim et al. 2025 : matrice de couverture benchmarks NeSy x
+      exigences specifiques. Zeros confirmes pour causal reasoning, multi-agent
+      testing, instructibility assessment, alignment verification.
+      Prouve l'absence de metriques, pas l'absence de protocoles — distinction utile.
+    score_pertinence_nmt2: 5
+    score_solidite_formelle: 4
+    score_risque_integration: 1
+    usage: citation_directe
+    verdict: "GARDER — citation directe"
+    destination: "Partie B §B.1 ou note dans CCP-4"
+    citation: "Hakim et al. 2025, Figure 11 — SPAR-4-SLR, 127 papers, kappa=0.89"
+    note_precision: >
+      La Figure 11 concerne les benchmarks d'evaluation, pas les architectures
+      operationnelles. Elle prouve l'absence de metriques, pas l'absence de protocoles.
+    statut: en_attente
+
+  - id: D-N03
+    proposition: P3
+    composant: "Dual-use NeSy comme justification regle cardinale"
+    convergence: analogique
+    description: >
+      Des systemes NeSy autonomes, sans supervision humaine dans la boucle de
+      decision, produisent des effets offensifs reels a cout marginal (HPTSA 42%,
+      VulnBot 30.3%). La regle cardinale CLAIM (escalade humaine si m(empty) >=
+      theta_conflit) trouve une justification empirique externe directe.
+    score_pertinence_nmt2: 4
+    score_solidite_formelle: 3
+    score_risque_integration: 1
+    usage: justificatif
+    verdict: "GARDER — usage justificatif"
+    destination: "Partie B §B.2 (calibration theta_conflit)"
+    note_risque: >
+      HPTSA/VulnBot sont des agents offensifs cyber, pas des capteurs ISR.
+      Le transfert analogique tient pour le principe (autonomie sans superviseur = risque)
+      mais ne doit pas etre presente comme un cas ISR direct.
+    statut: en_attente
+
+  - id: D-N04
+    proposition: P4
+    composant: "ThreatKG/CTINexus — precedent partiel a distinguer"
+    convergence: partielle_a_distinguer
+    description: >
+      Ces systemes partagent des representations de connaissances entre agents —
+      le plus proche existant d'un mecanisme de partage inter-agents dans la
+      litterature. Difference fondamentale et nette : triplets de faits vs. masses
+      de croyance sur Theta avec m(empty) explicite et statut illocutoire.
+    score_pertinence_nmt2: 3
+    score_solidite_formelle: 5
+    score_risque_integration: 1
+    usage: note_defensive
+    verdict: "GARDER — note defensive"
+    destination: "Partie B, note de bas de page ou §B.1"
+    formulation: >
+      "ThreatKG/CTINexus partagent des triplets RDF/STIX (entite, relation, entite).
+      CLAIM transmet des masses de croyance m: 2^Theta -> [0,1] avec m(empty) >=
+      theta_conflit comme contrainte de gouvernance — structure formellement distincte."
+    note: "1-2 lignes suffisent. Ne pas sur-expliquer."
+    statut: en_attente
+
+  - id: D-N05
+    proposition: P5
+    composant: "Reformulation de l'Assertion A"
+    actuelle: "exactement a l'interface L1->L2 (JDL)"
+    proposee: "interface entre tout noeud de traitement et l'orchestrateur"
+    convergence: forte
+    description: >
+      La formulation 'exactement a l'interface L1->L2' est une sur-specification
+      fragile. La litterature NeSy confirme le gap a toutes les interfaces inter-agents,
+      pas seulement L1->L2. La reformulation est plus defensable et mieux etayee.
+    score_pertinence_nmt2: 4
+    score_solidite_formelle: 5
+    score_risque_integration: 2
+    usage: reformulation
+    verdict: "GARDER — formulation hybride recommandee"
+    destination: "CCP-4 reformulation de l'Assertion A"
+    formulation_hybride: >
+      Conserver 'L1->L2 dans JDL' pour les evaluateurs MDN + ajouter la
+      generalisation NeSy entre parentheses ou en note.
+      Exemple : "...a l'interface L1->L2 du modele JDL (plus generalement, a toute
+      interface entre producteur d'information heterogene et orchestrateur)."
+    statut: en_attente
+
+chronologie_integration:
+  avant_soumission_J0:
+    - "D-N01 -> P1 vers CO-1 (formulation 'epistemique')"
+    - "D-N05 -> P5 vers CCP-4 (reformulation mineure Assertion A)"
+  dans_partie_b_github_annex:
+    - "D-N02 -> P2 Figure 11 — citer Hakim et al. 2025"
+    - "D-N03 -> P3 dual-use justification regle cardinale"
+    - "D-N04 -> P4 note defensive ThreatKG/CTINexus"
+  post_soumission_extension:
+    - "D-N01 -> P1 comme point de depart positionnement CLAIM dans ecosysteme NeSy-Cyber"

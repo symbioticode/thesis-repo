@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/dravitch/idees-proposal/specs/CLAIM_schema.json",
+  "title": "CLAIM",
+  "description": "Unite atomique d'echange du protocole epistemique inter-agents ISR. Conforme a CLAIM_specification.md v1.1 — Projet IDEeS AP6-defi-13.",
+  "type": "object",
+  "required": ["proposition", "belief_mass", "illocution", "freshness", "provenance"],
+  "additionalProperties": false,
+
+  "properties": {
+
+    "proposition": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Contenu propositionnel observe ou infere par l'agent. Hypothese de travail : l'entite est deja resolue (alignement spatio-temporel C-02 et resolution d'entites C-03 effectues en amont — DEC-S2-08).",
+      "examples": [
+        "Aucune signature acoustique detectee dans le secteur Nord-B",
+        "Emission RF coherente avec systeme de navigation militaire"
+      ]
+    },
+
+    "belief_mass": {
+      "type": "object",
+      "description": "Fonction de masse de croyance sur 2^Theta. Les cles sont des representations de sous-ensembles de Theta sous forme de chaines (ex. 'H1', 'H1|H2', 'Theta', 'empty'). La valeur 'empty' represente l'ensemble vide — conflit explicite jamais normalise (TBM Smets). Contrainte : somme de toutes les valeurs = 1.0 (tolerance 1e-6). CORR-TP01-01.",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0.0,
+        "maximum": 1.0
+      },
+      "examples": [
+        {
+          "H1": 0.7,
+          "Theta": 0.3,
+          "empty": 0.0
+        },
+        {
+          "H1": 0.4,
+          "H2": 0.3,
+          "H1|H2": 0.1,
+          "Theta": 0.15,
+          "empty": 0.05
+        }
+      ]
+    },
+
+    "illocution": {
+      "type": "string",
+      "enum": ["OBSERVE", "INFER", "DEDUCE", "ASSUME"],
+      "description": "Statut illocutionnaire auto-declare par l'agent. Fonde sur Speech Act Theory (Austin 1962, Searle 1969). Empeche l'orchestrateur d'inferer l'intention d'une boite noire. OBSERVE = mesure directe ; INFER = deduction probabiliste ; DEDUCE = conclusion logique ; ASSUME = hypothese de travail."
+    },
+
+    "freshness": {
+      "type": "object",
+      "required": ["t_obs", "delta_t_valid"],
+      "additionalProperties": false,
+      "description": "Horodatage et duree de validite de l'observation. Permet le discounting temporel exponentiel alpha(dt) = e^{-lambda*dt} et distingue le silence informatif (capteur non consulte) de l'absence de signal.",
+      "properties": {
+        "t_obs": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp UTC de l'observation au format ISO 8601."
+        },
+        "delta_t_valid": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Duree de validite en secondes. Le CLAIM passe EXPIRED quand t_reception > t_obs + delta_t_valid."
+        }
+      },
+      "examples": [
+        {
+          "t_obs": "2026-05-17T14:32:00Z",
+          "delta_t_valid": 60
+        }
+      ]
+    },
+
+    "provenance": {
+      "type": "object",
+      "required": ["chain_id"],
+      "additionalProperties": false,
+      "description": "Identifiant de provenance conforme W3C PROV-O (2013). Permet la tracabilite jusqu'au capteur physique et la deduplication des sources correlees (regle Denoeux).",
+      "properties": {
+        "chain_id": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI unique identifiant la chaine de traitement. Doit etre resolvable dans le registre de provenance de l'orchestrateur.",
+          "examples": ["urn:idees:agent:radar-tribord:chain:20260517T143200Z"]
+        },
+        "entity_id": {
+          "type": "string",
+          "description": "Identifiant PROV-O de l'entite observee (optionnel — si fourni, doit correspondre a l'entite resolue dans 'proposition')."
+        },
+        "agent_id": {
+          "type": "string",
+          "description": "Identifiant PROV-O de l'agent emetteur (optionnel)."
+        },
+        "activity_id": {
+          "type": "string",
+          "description": "Identifiant PROV-O de l'activite de traitement (optionnel)."
+        }
+      }
+    }
+  },
+
+  "examples": [
+    {
+      "proposition": "Aucune signature acoustique detectee dans le secteur Nord-B",
+      "belief_mass": {
+        "H1": 0.7,
+        "Theta": 0.3,
+        "empty": 0.0
+      },
+      "illocution": "OBSERVE",
+      "freshness": {
+        "t_obs": "2026-05-17T14:32:00Z",
+        "delta_t_valid": 60
+      },
+      "provenance": {
+        "chain_id": "urn:idees:agent:sonar-tribord:chain:20260517T143200Z",
+        "entity_id": "urn:idees:entity:zone-nord-b",
+        "agent_id": "urn:idees:agent:sonar-tribord",
+        "activity_id": "urn:idees:activity:acoustic-scan:20260517T143200Z"
+      }
+    }
+  ]
+}

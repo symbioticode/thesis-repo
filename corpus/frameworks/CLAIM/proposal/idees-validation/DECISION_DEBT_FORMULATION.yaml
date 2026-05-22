@@ -1,0 +1,189 @@
+# ============================================================
+# DECISION_DEBT — Branche BR-2026-FORMULATION
+# Projet IDEeS — IA Multimodale pour Decisions Situationnelles
+# Genere : 21 mai 2026 | Session : 12bis | Statut : EN ATTENTE
+# ============================================================
+
+meta:
+  branche: BR-2026-FORMULATION
+  methode: >
+    Question inversee : CLAIM comble-t-il des lacunes reelles pour les corpus
+    VLM recents ? Evaluation des composants CLAIM contre Molmo/PixMo,
+    Castrounis, Jayasri 2024.
+  date: "2026-05-21"
+  sprint_decision: Sprint 6
+  decisions_total: 6
+  spec_modifiee: false  # Aucune modification de CLAIM v1.1
+  note_gouvernance: >
+    Ce rapport est produit en isolation BR-2026-FORMULATION. Toute integration
+    d'un ARG dans Partie A est soumise a validation Andrei avant merge.
+
+corpus_sources:
+  - id: molmo_pixmo
+    reference: "Molmo/PixMo — Deitke et al. 2024"
+    domaine: "Vision-Language Models open-source"
+    pertinence: "Corpus de reference VLM — architecture 4 composants, pointing style tags"
+  - id: castrounis
+    reference: "Castrounis — Joint Embedding Space"
+    domaine: "Multimodal embeddings"
+    pertinence: "Notion d'espace embedding joint — le plus proche d'un EPISTEMIC_STATE"
+  - id: jayasri
+    reference: "Jayasri 2024 — fluffy-guide"
+    domaine: "Agents multi-modaux temps reel"
+    pertinence: "Architecture 2-agents (listener/guide) — absence d'orchestrateur"
+
+arguments_partie_a:
+  - id: ARG-F1
+    label: "Belnap + operationnel"
+    formulation: >
+      "Les meilleurs VLMs ouverts (famille Molmo, 86M parametres) ne distinguent
+      pas l'absence d'information du desaccord entre capteurs. CLAIM formalise
+      cet etat B (both) comme signal d'escalade, distinct de N (silence qualifie)."
+    impact: principal
+    position_recommandee: "Partie A — position principale differenciateur"
+    score_impact: 5
+
+  - id: ARG-F2
+    label: "DS + decision"
+    formulation: >
+      "Un agent Molmo produit un resultat ponctuel sur Mt. Rainier. Un systeme ISR
+      exige : masse 0.7 sur {Rainier}, masse 0.2 sur {Adams}, masse 0.1 sur Theta.
+      CLAIM standardise ce transfert."
+    impact: support_ou_partie_b
+    position_recommandee: "Partie B — trop technique pour 3000 car. si ARG-F1 occupe la position principale"
+    score_impact: 4
+
+  - id: ARG-F3
+    label: "SAT + arbitrage"
+    formulation: >
+      "Aucune architecture multi-agents publiee (Jayasri 2024, fluffy-guide ; Molmo 2024)
+      ne type l'acte illocutoire de l'output agent. CLAIM introduit ce typage comme
+      condition necessaire a une orchestration decisionnelle responsable."
+    impact: support
+    position_recommandee: "Partie A — support apres ARG-F1"
+    score_impact: 4
+
+decisions:
+  - id: D-F01
+    composant: "DS — Masses de croyance sur 2^Theta"
+    lacune_identifiee: >
+      Molmo produit un resultat ponctuel — zero distribution sur hypotheses alternatives.
+      Un pointing a (63.5, 44.5) ne dit pas "je crois a 0.7 que c'est Mt. Rainier,
+      et a 0.3 que c'est Mt. Adams."
+    source_lacune: molmo_pixmo
+    score_pertinence_nmt2: 5
+    solidite_formelle: excellente
+    risque_integration: nul
+    verdict: GARDER
+    destination: "Partie A (ARG-F2) + Partie B (detail calibration)"
+    argument_soumission: "Molmo produit un score, CLAIM produit une distribution."
+    statut: en_attente
+
+  - id: D-F02
+    composant: "Belnap 4 etats (T / F / N / B)"
+    lacune_identifiee: >
+      Confusion N/B absente de tous les systemes cites. Aucun des modeles ne distingue
+      entre 'information contradictoire recue' (B) et 'information absente' (N).
+      En ISR, capteur silencieux (N) vs. deux capteurs contradictoires (B) = implications
+      de decision radicalement differentes.
+    sources_lacune: [molmo_pixmo, jayasri]
+    score_pertinence_nmt2: 5
+    solidite_formelle: excellente
+    risque_integration: nul
+    verdict: "GARDER — argument CLE"
+    destination: "Partie A (differenciateur principal)"
+    argument_soumission: "La distinction N/B est absente de tous les systemes existants et directement critique en ISR."
+    statut: en_attente
+
+  - id: D-F03
+    composant: "AGM — Revision de croyance"
+    lacune_identifiee: >
+      Le fine-tuning est batch, hors-ligne, couteux. La memoire roulante de Jayasri
+      accumule sans jamais retirer. AGM fournit les axiomes pour une revision
+      incrementale, tracable, et reversible.
+    source_lacune: [molmo_pixmo, jayasri]
+    score_pertinence_nmt2: 3
+    solidite_formelle: bonne
+    risque_integration: nul
+    verdict: "GARDER — differe NMT 3"
+    destination: "Partie B uniquement — trop technique pour 3000 car."
+    statut: en_attente
+    note: "Pertinent pour NMT 4-5. Ne pas foregronder dans la soumission."
+
+  - id: D-F04
+    composant: "SAT — Actes illocutoires"
+    lacune_identifiee: >
+      Les style tags de Molmo ('vqa2:', 'long caption:') sont des marqueurs illocutoires
+      primitifs — non formalises, non interoperables entre agents. L'agent guide de
+      Jayasri ne distingue pas entre une assertion et une requete d'information.
+      Sans typage illocutoire, un orchestrateur ne peut pas distinguer un agent qui
+      informe / recommande / alerte.
+    sources_lacune: [molmo_pixmo, jayasri]
+    score_pertinence_nmt2: 5
+    solidite_formelle: bonne
+    risque_integration: nul
+    verdict: "GARDER — argument operationnel"
+    destination: "Partie A (reformulation accessible) via ARG-F3"
+    argument_soumission: "Informer != recommander != alerter : CLAIM type l'acte, les VLMs ne le font pas."
+    statut: en_attente
+
+  - id: D-F05
+    composant: "EPISTEMIC_STATE (orchestrateur)"
+    lacune_identifiee: >
+      Molmo produit des outputs mais aucun etat agrege inter-modal. L'architecture
+      4-composants n'a pas de couche d'arbitrage. L'architecture 2-agents de Jayasri
+      n'a pas d'orchestrateur — listener et guide coexistent sans arbitrage formel.
+      Qui agrege les sorties de 3 VLMs sur le meme theatre ? Aujourd'hui : personne.
+    sources_lacune: [molmo_pixmo, jayasri, castrounis]
+    score_pertinence_nmt2: 5
+    solidite_formelle: excellente
+    risque_integration: nul
+    verdict: "GARDER — argument de cloture"
+    destination: "Partie A (position finale)"
+    argument_soumission: "Aucun systeme existant n'a de couche d'arbitrage inter-agents formalisee."
+    statut: en_attente
+
+  - id: D-F06
+    composant: "audit_hash — Traçabilite de provenance"
+    lacune_identifiee: >
+      L'absence d'audit_hash signifie qu'une trace de decision est impossible :
+      on ne peut pas savoir quel agent a produit quelle contribution a la fusion.
+      En ISR, la traçabilite de provenance est une exigence legale et operationnelle.
+      Jayasri ne l'adresse pas meme en prototype.
+    sources_lacune: [molmo_pixmo, jayasri]
+    score_pertinence_nmt2: 4
+    solidite_formelle: bonne
+    risque_integration: nul
+    verdict: GARDER
+    destination: "Partie A (1 phrase) + Partie B"
+    argument_soumission: "Traçabilite de provenance : exigence MDN non adressee par les VLMs."
+    statut: en_attente
+
+risques_integration:
+  - id: R-F1
+    nature: "Contamination de perimetre"
+    description: >
+      Les 3 sources traitent de VLMs civils (navigation, lecture, captioning).
+      Leur citation directe dans la soumission MDN doit etre calibree.
+    mitigation: "Elles servent a situer le gap, pas a definir le contexte d'application."
+
+  - id: R-F2
+    nature: "Complexification de Partie A"
+    description: >
+      AGM introduit une complexite formelle disproportionnee pour 3000 car.
+    mitigation: "Maintenir AGM en Partie B."
+
+  - id: R-F3
+    nature: "Surcharge argumentaire"
+    description: "Les 3 ARG ne doivent pas tous apparaitre en Partie A."
+    mitigation: "ARG-F1 en position principale, ARG-F3 en support, ARG-F2 en Partie B."
+
+chronologie_integration:
+  avant_soumission_J0:
+    - "D-F01 -> ARG-F2 en Partie A si place disponible"
+    - "D-F02 -> ARG-F1 en position principale Partie A"
+    - "D-F04 -> ARG-F3 en support Partie A"
+    - "D-F05 -> EPISTEMIC_STATE Partie A position finale"
+    - "D-F06 -> audit_hash Partie A 1 phrase"
+  dans_partie_b_github_annex:
+    - "D-F03 -> AGM revision — reserve NMT 4-5"
