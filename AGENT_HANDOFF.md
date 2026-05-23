@@ -102,3 +102,21 @@ questions_ouvertes:
 prochaine_action: Finalisation de la thèse et revue par Andrei.
 bloquants: NON
 ```
+
+---
+
+## J1 — Claude Code (23 mai 2026)
+
+```yaml
+date: 2026-05-23
+agent: Claude Code
+jour: J1
+livrables_produits:
+  - poc/claim/structures.py : 45 lignes
+  - poc/claim/validator.py : 115 lignes
+  - poc/tests/test_validator.py : 118 lignes
+questions_ouvertes:
+  - La tolérance de 1e-6 pour la somme des masses est-elle suffisante pour tous les agents ISR ? → Andrei
+prochaine_action: Démarrer J2 (Combinator TBM).
+bloquants: NON
+```
