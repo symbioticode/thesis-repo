@@ -31,24 +31,24 @@ activation_mode: operative
 
 ## Ce qui reste ouvert (à valider empiriquement)
 
-**H001 — N=3 pour la décroissance**  
-Un élément non référencé dans 3 sessions consécutives est candidat à l'archivage.  
+**H001 — N=3 pour la décroissance**
+Un élément non référencé dans 3 sessions consécutives est candidat à l'archivage.
 Valider : après 10 sessions instrumentées, les candidats détectés sont-ils effectivement obsolètes ?
 
-**H002 — FR cible = 0.65**  
-Au-delà de 0.65, le coût de maintenance dépasse le bénéfice.  
+**H002 — FR cible = 0.65**
+Au-delà de 0.65, le coût de maintenance dépasse le bénéfice.
 Valider : corrélation entre (C1+C2+C3 = 3) et productivité de session sur 5+ mesures.
 
-**H003 — 5 types de recadrages**  
-Le corpus MIF révèle des recadrages récurrents. 4-5 types distincts probables.  
+**H003 — 5 types de recadrages**
+Le corpus MIF révèle des recadrages récurrents. 4-5 types distincts probables.
 Valider : catalogue extrait après 10+ sessions avec Q7 documentés.
 
-**H004 — PROMPT_ORCHESTRATION**  
-Une instance IA sans historique peut mettre à jour `anamnese_state.yaml` correctement.  
+**H004 — PROMPT_ORCHESTRATION**
+Une instance IA sans historique peut mettre à jour `anamnese_state.yaml` correctement.
 Valider : test en Phase 2 avec une instance froide.
 
-**H005 — ANAMNÈSE × PCCD relation**  
-Est-ce une instance-enfant de PCCD ou un protocole pair qui partage ses invariants ?  
+**H005 — ANAMNÈSE × PCCD relation**
+Est-ce une instance-enfant de PCCD ou un protocole pair qui partage ses invariants ?
 Valider : soumettre à PCCD avec les 8 invariants candidats — combien ANAMNÈSE respecte-t-elle ?
 
 ---
@@ -118,5 +118,5 @@ ANAMNÈSE sera certifiable quand :
 
 ---
 
-*ANAMNÈSE qualification · status: PENDING · 2026-04-26*  
+*ANAMNÈSE qualification · status: PENDING · 2026-04-26*
 *Voir HALO_ANAMNESE_Upgrade.md pour les instructions d'implémentation*

@@ -1,0 +1,18 @@
+* init/structure
+  jules-14812433737456665504-93d930a8
+  main
+  remotes/origin/main
+On branch init/structure
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   branch.txt
+	new file:   git_info.txt
+	new file:   log.txt
+	new file:   remote.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	git_output.txt
+
+* 7ecc819 (HEAD -> init/structure) Consolidate all work on init/structure branch
+* eae5319 (main, jules-14812433737456665504-93d930a8) Initial commit

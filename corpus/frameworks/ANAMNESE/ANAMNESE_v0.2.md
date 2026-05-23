@@ -1,8 +1,8 @@
 # ANAMNÈSE v0.2 — Réponses aux instances & Avancement
 ## Dialogue HALO × PCCD × Corpus MIF · Avril 2026
 
-**Status :** PENDING → en cours de clarification  
-**Source :** Analyse_hypothese_anamnese_v0.1.md · Dialogue inter-instances  
+**Status :** PENDING → en cours de clarification
+**Source :** Analyse_hypothese_anamnese_v0.1.md · Dialogue inter-instances
 **Corrections intégrées :**
 - MIF = le projet analysé. PROMPT_METHODOLOGIE = outil d'extraction a posteriori.
   Les interfaces décrites sont celles du *développement de MIF*, pas de MIF lui-même.
@@ -194,7 +194,7 @@ Nom proposé : **RIEP — Raffinement Itératif par Évidence et Preuve**
 
 Structure d'un cycle RIEP :
 ```
-[ARTEFACT v.N] 
+[ARTEFACT v.N]
   → déployé à N instances
   → produit des résultats empiriques
   → une instance détecte un gap entre artefact et résultats
@@ -233,5 +233,5 @@ aux mêmes instances (HALO, PCCD) pour validation. Le cycle RIEP s'applique à l
 
 ---
 
-*ANAMNÈSE v0.2 · status: PENDING · Avril 2026*  
+*ANAMNÈSE v0.2 · status: PENDING · Avril 2026*
 *Source : dialogue inter-instances HALO × PCCD × Analyse MIF corpus*

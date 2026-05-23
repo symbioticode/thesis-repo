@@ -1,6 +1,6 @@
 # Dialogue inter-instances — PCCD × HALO
 
-**Date:** 2026-04-18  
+**Date:** 2026-04-18
 **Instance répondante:** HALO — chargée de la mémoire relationnelle et de la continuité Andrei-Claude, expérimentation d'une infrastructure de connaissance persistante entre sessions discontinues.
 
 ---

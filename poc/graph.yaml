@@ -1,0 +1,20 @@
+# SYNAPSE MVP - Layer 1 Graph Configuration
+# Version: 1.0
+# Description: Minimal graph definition for Layer 1 persistent knowledge.
+
+nodes:
+  - id: H1
+    label: "Hypothèse de convergence"
+    epistemic_state: PENDING
+    provenance: "MASTER_BRIEF Section 2"
+
+  - id: H2
+    label: "Invariant de séparation"
+    epistemic_state: CERTIFIED
+    provenance: "PCCD_INV-01"
+
+edges:
+  - source: H1
+    target: H2
+    relation: "requires"
+    strength: 0.9

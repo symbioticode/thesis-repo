@@ -1,8 +1,8 @@
 # TP-01 — Spécification formelle du CLAIM
-**Projet** : IDEeS AP6-défi-13 — Protocole d'échange épistémique pour orchestration de systèmes multi-agents ISR hétérogènes  
-**Version** : 1.1 — 16 mai 2026  
-**Statut** : VALIDÉ v1.1 (Andrei, 16 mai 2026)  
-**Dépendances** : DEC-05, DEC-06, DEC-S2-05, QO-S2-01 (résolu)  
+**Projet** : IDEeS AP6-défi-13 — Protocole d'échange épistémique pour orchestration de systèmes multi-agents ISR hétérogènes
+**Version** : 1.1 — 16 mai 2026
+**Statut** : VALIDÉ v1.1 (Andrei, 16 mai 2026)
+**Dépendances** : DEC-05, DEC-06, DEC-S2-05, QO-S2-01 (résolu)
 **Destination** : `specs/CLAIM_specification.md`
 
 ---
@@ -210,6 +210,6 @@ Cette contrainte est tracée ici pour ne pas être oubliée à l'ouverture de CO
 
 ---
 
-*Spécification produite le 15 mai 2026 — mise à jour le 16 mai 2026.*  
-*Validée par Andrei (PI). Autorité de modification : Andrei uniquement sur `main`.*  
+*Spécification produite le 15 mai 2026 — mise à jour le 16 mai 2026.*
+*Validée par Andrei (PI). Autorité de modification : Andrei uniquement sur `main`.*
 *Prochaine étape : Sprint 2 — CO-1 (J4, contrainte épistémique tracée ci-dessus).*

@@ -1,8 +1,8 @@
 # LOG_certifiable — Format de log certifiable m(∅)
-**Référence** : TP-02  
-**Version** : 1.1 — 18 mai 2026 (correction Session 9bis : 11 champs distincts)  
-**Auteur** : Claude (instance de session) — validé Andrei (PI)  
-**Standards** : DO-178C / IEC 61508  
+**Référence** : TP-02
+**Version** : 1.1 — 18 mai 2026 (correction Session 9bis : 11 champs distincts)
+**Auteur** : Claude (instance de session) — validé Andrei (PI)
+**Standards** : DO-178C / IEC 61508
 **Statut** : LIVRÉ — dans specs/LOG_certifiable.md
 
 ---
@@ -23,70 +23,70 @@ Ce document spécifie le format de journalisation certifiable pour la masse de c
 
 ### Champ 1 — log_id
 
-**Type** : string, UUID v4  
-**Contrainte** : unique par enregistrement, généré à la création  
-**Exemple** : `"7f3a2c1e-9b4d-4f8e-a2c1-3d5e7f9b0a2c"`  
+**Type** : string, UUID v4
+**Contrainte** : unique par enregistrement, généré à la création
+**Exemple** : `"7f3a2c1e-9b4d-4f8e-a2c1-3d5e7f9b0a2c"`
 **Justification DO-178C** : identifiant non ambigu requis pour la traçabilité des artefacts logiciels (§7.2.5)
 
 ---
 
 ### Champ 2 — timestamp
 
-**Type** : string, ISO 8601 UTC avec précision milliseconde  
-**Format** : `YYYY-MM-DDTHH:MM:SS.mmmZ`  
-**Exemple** : `"2026-05-18T14:32:07.443Z"`  
+**Type** : string, ISO 8601 UTC avec précision milliseconde
+**Format** : `YYYY-MM-DDTHH:MM:SS.mmmZ`
+**Exemple** : `"2026-05-18T14:32:07.443Z"`
 **Justification IEC 61508** : horodatage de précision sous-seconde requis pour la reconstruction de séquence d'événements (§7.4.3.1)
 
 ---
 
 ### Champ 3 — chain_id
 
-**Type** : string, URI conforme W3C PROV-O  
-**Format** : `urn:idees:chain:{uuid}`  
-**Exemple** : `"urn:idees:chain:a1b2c3d4-e5f6-7890-abcd-ef1234567890"`  
+**Type** : string, URI conforme W3C PROV-O
+**Format** : `urn:idees:chain:{uuid}`
+**Exemple** : `"urn:idees:chain:a1b2c3d4-e5f6-7890-abcd-ef1234567890"`
 **Justification** : lien vers la chaîne de provenance complète — permet l'audit jusqu'au capteur physique source (CORR-TP01-05)
 
 ---
 
 ### Champ 4 — lifecycle_transition
 
-**Type** : string, enum  
+**Type** : string, enum
 **Valeurs autorisées** :
 - `"COMBINING"` — combinaison TBM en cours
 - `"COMBINED"` — combinaison terminée, résultat disponible
 - `"ESCALATED"` — escalade humaine déclenchée (`m(∅) ≥ θ_conflit`)
 - `"RESOLVED"` — résolution opérateur reçue (NMT 4-5)
 
-**Exemple** : `"ESCALATED"`  
+**Exemple** : `"ESCALATED"`
 **Justification DO-178C** : traçabilité des transitions d'état du logiciel (§6.3.1)
 
 ---
 
 ### Champ 5 — transition_cause
 
-**Type** : string, description lisible  
-**Contrainte** : non vide si `lifecycle_transition` ∈ {`"ESCALATED"`, `"RESOLVED"`}  
-**Exemple** : `"m_combined(vide) = 0.4200 >= theta_conflit = 0.3000 — paire conflictuelle : (Radar, SIGINT)"`  
+**Type** : string, description lisible
+**Contrainte** : non vide si `lifecycle_transition` ∈ {`"ESCALATED"`, `"RESOLVED"`}
+**Exemple** : `"m_combined(vide) = 0.4200 >= theta_conflit = 0.3000 — paire conflictuelle : (Radar, SIGINT)"`
 **Justification IEC 61508** : cause de chaque transition vers un état de sécurité documentée (§7.4.2)
 
 ---
 
 ### Champ 6 — m_empty_before
 
-**Type** : float, [0.0, 1.0]  
-**Précision** : 6 décimales  
-**Sémantique** : valeur de `m_combined(∅)` **avant** la combinaison du cycle courant (état initial du cycle)  
-**Exemple** : `0.000000`  
+**Type** : float, [0.0, 1.0]
+**Précision** : 6 décimales
+**Sémantique** : valeur de `m_combined(∅)` **avant** la combinaison du cycle courant (état initial du cycle)
+**Exemple** : `0.000000`
 **Note** : vaut 0.0 au premier cycle (aucune combinaison préalable)
 
 ---
 
 ### Champ 7 — m_empty_after
 
-**Type** : float, [0.0, 1.0]  
-**Précision** : 6 décimales  
-**Sémantique** : valeur de `m_combined(∅)` **après** la combinaison du cycle courant (résultat de la règle conjonctive non normalisée)  
-**Exemple** : `0.420000`  
+**Type** : float, [0.0, 1.0]
+**Précision** : 6 décimales
+**Sémantique** : valeur de `m_combined(∅)` **après** la combinaison du cycle courant (résultat de la règle conjonctive non normalisée)
+**Exemple** : `0.420000`
 **Justification** : c'est cette valeur qui est comparée à `θ_conflit` pour la décision d'escalade
 
 > **Distinction champs 6/7** : m_empty_before capture l'état entrant ; m_empty_after capture le résultat. La différence `m_empty_after - m_empty_before` est le delta de conflit introduit par les CLAIMs du cycle courant — information utile pour la localisation PCR5.
@@ -95,50 +95,50 @@ Ce document spécifie le format de journalisation certifiable pour la masse de c
 
 ### Champ 8 — belnap_state_after
 
-**Type** : string, enum  
-**Valeurs autorisées** : `"T"` | `"F"` | `"B"` | `"N"`  
+**Type** : string, enum
+**Valeurs autorisées** : `"T"` | `"F"` | `"B"` | `"N"`
 **Sémantique** :
 - `"T"` : accord sur H (True)
 - `"F"` : accord sur ¬H (False)
 - `"B"` : contradiction active — escalade obligatoire (Both)
 - `"N"` : silence qualifié — aucune source n'a observé (Neither)
 
-**Exemple** : `"B"`  
-**Règle de priorité** : B > N > T/F (CORR-TP01-06)  
+**Exemple** : `"B"`
+**Règle de priorité** : B > N > T/F (CORR-TP01-06)
 **Justification** : état épistémique de sortie exposé à l'interface opérateur (C-07)
 
 ---
 
 ### Champ 9 — combination_rule
 
-**Type** : string, enum  
+**Type** : string, enum
 **Valeurs autorisées** :
 - `"TBM_CONJUNCTIVE"` — règle conjonctive non normalisée (Smets) — utilisé NMT 2-3
 - `"PCR5"` — Proportional Conflict Redistribution 5
 - `"PCR6_PLUS"` — variante VBBA-safe (verrou NMT 2, PCA-01)
 - `"DEMPSTER_NORMALIZED"` — interdit dans ce système (paradoxe de Zadeh)
 
-**Exemple** : `"TBM_CONJUNCTIVE"`  
+**Exemple** : `"TBM_CONJUNCTIVE"`
 **Justification DO-178C** : identification de l'algorithme de décision (§6.3.4)
 
 ---
 
 ### Champ 10 — sil_dal_level
 
-**Type** : string, enum  
-**Valeurs autorisées** : `"SIL-1"` | `"SIL-2"` | `"SIL-3"` | `"SIL-4"` | `"DAL-A"` | `"DAL-B"` | `"DAL-C"` | `"DAL-D"`  
-**Exemple** : `"SIL-2"` (NMT 2-3, données synthétiques)  
-**Justification IEC 61508** : niveau d'intégrité de sécurité applicable à l'enregistrement (§3.5.4)  
+**Type** : string, enum
+**Valeurs autorisées** : `"SIL-1"` | `"SIL-2"` | `"SIL-3"` | `"SIL-4"` | `"DAL-A"` | `"DAL-B"` | `"DAL-C"` | `"DAL-D"`
+**Exemple** : `"SIL-2"` (NMT 2-3, données synthétiques)
+**Justification IEC 61508** : niveau d'intégrité de sécurité applicable à l'enregistrement (§3.5.4)
 **Note NMT** : SIL-2 pour NMT 2-3 sur données synthétiques. Révision vers SIL-3/SIL-4 prévue NMT 4-5 sur données réelles.
 
 ---
 
 ### Champ 11 — integrity_hash
 
-**Type** : string, SHA-256 hex (64 caractères)  
-**Calcul** : SHA-256 de la concaténation canonique des champs 1 à 10 (JSON sérialisé, clés triées alphabétiquement, sans espaces)  
-**Exemple** : `"a3f7c2e1b9d4e8f0c1a2b3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4"`  
-**Justification DO-178C** : intégrité de l'enregistrement vérifiable indépendamment (§7.2.6)  
+**Type** : string, SHA-256 hex (64 caractères)
+**Calcul** : SHA-256 de la concaténation canonique des champs 1 à 10 (JSON sérialisé, clés triées alphabétiquement, sans espaces)
+**Exemple** : `"a3f7c2e1b9d4e8f0c1a2b3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4"`
+**Justification DO-178C** : intégrité de l'enregistrement vérifiable indépendamment (§7.2.6)
 **Note** : le hash couvre les champs 1-10 uniquement (pas lui-même). Recalculable à tout moment pour audit.
 
 ---
@@ -147,11 +147,11 @@ Ce document spécifie le format de journalisation certifiable pour la masse de c
 
 ### operator_notified
 
-**Type** : boolean  
-**Sémantique** : indique si l'interface opérateur (C-07) a reçu la notification d'escalade  
-**Valeur par défaut** : `false`  
-**Devient** `true` : à la confirmation de réception par C-07  
-**Obligatoire en NMT 4-5** : oui (traçabilité de la notification humaine)  
+**Type** : boolean
+**Sémantique** : indique si l'interface opérateur (C-07) a reçu la notification d'escalade
+**Valeur par défaut** : `false`
+**Devient** `true` : à la confirmation de réception par C-07
+**Obligatoire en NMT 4-5** : oui (traçabilité de la notification humaine)
 **Note** : optionnel en NMT 2-3 car C-07 est simulé. Le champ est présent dans le schéma pour assurer la compatibilité ascendante.
 
 ---
@@ -230,5 +230,5 @@ Si `m_empty_after ≥ θ_conflit` alors `lifecycle_transition` doit être `"ESCA
 
 ---
 
-*Spec maintenue par Claude (instance de session). Autorité de validation : Andrei (PI).*  
+*Spec maintenue par Claude (instance de session). Autorité de validation : Andrei (PI).*
 *Commit : specs/LOG_certifiable.md — version 1.1 corrige le comptage de champs du récapitulatif Session 9.*

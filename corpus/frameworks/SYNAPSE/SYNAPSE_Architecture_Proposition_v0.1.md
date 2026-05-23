@@ -440,7 +440,7 @@ La seconde est une correction sur le vide 1. "HALO n'a pas de graphe traversable
 
 HALO a dit quelque chose d'important en passant : *"HALO resterait ce qu'il est, et SYNAPSE serait la couche au-dessus."*
 
-Ça pose une question de gouvernance que ni SYNAPSE ni ANAMNÈSE n'ont encore adressée. Si `exocortex.yaml` agrège des nœuds de projets multiples, et que ces projets ont des statuts épistémiques hétérogènes — D-SIG CERTIFIED, TOPOSFIN PENDING, Protocol X en validation terrain — qui maintient `exocortex.yaml` ? 
+Ça pose une question de gouvernance que ni SYNAPSE ni ANAMNÈSE n'ont encore adressée. Si `exocortex.yaml` agrège des nœuds de projets multiples, et que ces projets ont des statuts épistémiques hétérogènes — D-SIG CERTIFIED, TOPOSFIN PENDING, Protocol X en validation terrain — qui maintient `exocortex.yaml` ?
 
 Dans HALO, c'est clair : Andrei maintient `anamnese_state.yaml` avec le rituel de fin de session. Mais `exocortex.yaml` n'appartient à aucune session de projet particulière. Il est mis à jour quand un projet change de statut — ce qui peut arriver dans n'importe quelle session de n'importe quel projet.
 

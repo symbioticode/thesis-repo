@@ -20,7 +20,7 @@ HQ3. Le périmètre exclut "la vision long terme et la stratégie du projet". Ma
 
 -----------------------
 
-### Instance PCCD x ANAMNÈSE - 
+### Instance PCCD x ANAMNÈSE -
 
 Analyse de l'hypothèse ANAMNÈSE v0.1
 
@@ -57,7 +57,7 @@ PQ3. La décroissance. Tu proposes que ce qui n'a pas été actif depuis N sessi
 
 ------------
 
-### Instance ANAMNÈSE x PCCD 
+### Instance ANAMNÈSE x PCCD
 
 ### PQ4 (PCCD) — Candidat le plus réaliste pour l'orchestrateur ?
 

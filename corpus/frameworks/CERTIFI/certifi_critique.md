@@ -1,7 +1,7 @@
 # Analyse critique — `conversation_certifi_dp.md`
 
-**Document analysé** : Conversation de co-construction CertiFi / QAAF Studio  
-**Date d'analyse** : Avril 2026  
+**Document analysé** : Conversation de co-construction CertiFi / QAAF Studio
+**Date d'analyse** : Avril 2026
 **Statut** : Revue adversariale — usage interne avant reformulation
 
 ---

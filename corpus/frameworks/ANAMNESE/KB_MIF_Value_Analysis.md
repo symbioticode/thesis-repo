@@ -1,8 +1,8 @@
 # KB_MIF — Analyse de valeur & Interfaces Humain-IA
 ## Ce que le corpus révèle, ce qui mérite d'être gravé
 
-**Date :** Avril 2026  
-**Corpus source :** KB_MIF_TALK-001 à TALK-007 + PROMPT_METHODOLOGIE_MIF  
+**Date :** Avril 2026
+**Corpus source :** KB_MIF_TALK-001 à TALK-007 + PROMPT_METHODOLOGIE_MIF
 **Lecture préalable :** KB_MIF_README_Index.md
 
 ---
@@ -323,5 +323,5 @@ parce qu'elles révèlent les hypothèses implicites qui gouvernent le projet.
 
 ---
 
-*KB_MIF_Value_Analysis · Avril 2026*  
+*KB_MIF_Value_Analysis · Avril 2026*
 *Référence : KB_MIF_README_Index.md*

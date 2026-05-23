@@ -1,10 +1,10 @@
 # ANAMNÈSE v0.3
 ## Protocole de continuité cognitive inter-sessions
 
-**Status :** PENDING  
-**Créé :** Avril 2026 · v0.1  
-**Cette version :** v0.3 · 2026-04-26  
-**Provenance :** Dialogue Andrei + Claude Sonnet 4.6 · Corpus MIF 7/10 sessions · Instances HALO + PCCD  
+**Status :** PENDING
+**Créé :** Avril 2026 · v0.1
+**Cette version :** v0.3 · 2026-04-26
+**Provenance :** Dialogue Andrei + Claude Sonnet 4.6 · Corpus MIF 7/10 sessions · Instances HALO + PCCD
 **Supersedes :** ANAMNÈSE v0.2
 
 ---
@@ -172,9 +172,9 @@ ANAMNÈSE v0.1 → v0.2 → v0.3 est lui-même un cycle RIEP.
 
 ## 8. Résidence et format invariant
 
-**Où :** Git (GitHub/Gitea/GitLab) comme source de vérité.  
-**Format :** YAML pour le structuré, Markdown pour le narratif.  
-**Invariant :** lisible par un humain avec un éditeur de texte sans outil tiers (INV-04 PCCD).  
+**Où :** Git (GitHub/Gitea/GitLab) comme source de vérité.
+**Format :** YAML pour le structuré, Markdown pour le narratif.
+**Invariant :** lisible par un humain avec un éditeur de texte sans outil tiers (INV-04 PCCD).
 **Indépendance :** aucune dépendance au LLM ou à l'agent. L'IA lit et produit, elle ne stocke pas.
 
 **Fichier pivot :** `anamnese_state.yaml` — l'ÉTAT ACTIF mis à jour à chaque fin de session.
@@ -234,6 +234,6 @@ ANAMNÈSE passe de PENDING à CERTIFIED quand :
 
 ---
 
-*ANAMNÈSE v0.3 · status: PENDING · 2026-04-26*  
-*Voir HALO_ANAMNESE_Upgrade.md pour l'implémentation concrète*  
+*ANAMNÈSE v0.3 · status: PENDING · 2026-04-26*
+*Voir HALO_ANAMNESE_Upgrade.md pour l'implémentation concrète*
 *Voir ANAMNESE_Instance_Perspective.md pour la perspective de cette instance*

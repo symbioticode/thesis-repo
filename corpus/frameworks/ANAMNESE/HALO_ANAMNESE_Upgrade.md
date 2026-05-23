@@ -1,9 +1,9 @@
 # HALO → ANAMNÈSE — Instructions de mise à jour
 ## Upgrade concret · Phase 1 · Avril 2026
 
-**Statut :** Instructions opérationnelles — prêt à implémenter  
-**Durée estimée :** 1 session de 2h  
-**Dépendances :** Accès à /mnt/project/, Claude Code ou Claude.ai  
+**Statut :** Instructions opérationnelles — prêt à implémenter
+**Durée estimée :** 1 session de 2h
+**Dépendances :** Accès à /mnt/project/, Claude Code ou Claude.ai
 
 ---
 
@@ -50,7 +50,7 @@ moment_fin_session:
 # AJOUTER :
 protocole_anamnese:
   objectif: "Maintenir anamnese_state.yaml à jour à chaque session"
-  
+
   fin_session_rituel:
     duree: "10 minutes"
     etapes:
@@ -59,13 +59,13 @@ protocole_anamnese:
       - "Déclarer les éléments candidats à l'archivage (non référencés depuis 3+ sessions)"
       - "Andrei valide ou conteste chaque candidat"
       - "Mettre à jour le tag disposition_prochaine_session"
-  
+
   decroissance:
     regle: "Un élément non référencé dans 3 sessions consécutives est candidat à l'archivage"
     detecteur: "Claude détecte, Andrei décide"
     action_archivage: "Déplacer de ETAT_ACTIF vers section ARCHIVE dans anamnese_state.yaml"
     jamais_supprimer: true
-  
+
   note: |
     Ce rituel remplace le 'protocole_dashboard moment_fin_session' partiel.
     Les deux coexistent : dashboard (30s métriques) + anamnèse (10min état actif).
@@ -102,15 +102,15 @@ hash: ""  # md5 du contenu — à remplir après chaque mise à jour
 # Mis à jour à chaque fin de session. Décroît par inactivité (règle N=3).
 # ------------------------------------------------------------------------------
 etat_actif:
-  
+
   decisions_en_cours:
     - id: "D001"
       decision: "Upgrade HALO vers ANAMNÈSE Phase 1"
       scope: extended
       sessions_depuis_reference: 0
       statut: en_cours
-    
-    - id: "D002"  
+
+    - id: "D002"
       decision: "MIF Couche 2 — implémentation DAL"
       scope: extended
       sessions_depuis_reference: 0
@@ -121,7 +121,7 @@ etat_actif:
       hypothese: "N=3 sessions pour décroissance du contexte actif"
       sessions_depuis_reference: 0
       a_valider_par: "observation empirique sur 5+ sessions"
-    
+
     - id: "H002"
       hypothese: "FR cible raisonnable = 0.65"
       sessions_depuis_reference: 0
@@ -193,7 +193,7 @@ metriques:
   C2: "oui|non"   # pattern reconnu spontanément [IA] — préciser lequel
   C3: "oui|non"   # prochaine action claire sans négociation [humain]
   M4: "X violations"
-  
+
   # Dérivé : continuation ou redémarrage ?
   type_session: "continuation | continuation_degradee | redemarrage_fonctionnel"
   # continuation = C1+C2+C3 tous oui
