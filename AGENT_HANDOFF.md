@@ -84,3 +84,21 @@ questions_ouvertes:
 prochaine_action: Démarrer J3 (Chapitres 4 et 5 + Assemblage).
 bloquants: NON
 ```
+
+---
+
+## J3 — Jules (23 mai 2026)
+
+```yaml
+date: 2026-05-23
+agent: Jules
+jour: J3
+livrables_produits:
+  - thesis/ch4_implementation.md : ~600 mots
+  - thesis/ch5_poc.md : ~450 mots
+  - thesis/README.md : ~300 mots
+questions_ouvertes:
+  - Le Chapitre 4 documente-t-il suffisamment les échecs (Fake Code) pour valider l'invariant d'escalade humaine ? → Andrei
+prochaine_action: Finalisation de la thèse et revue par Andrei.
+bloquants: NON
+```
